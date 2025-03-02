@@ -13,7 +13,7 @@ const Target = (props) => {
             duration: 1.5,
             repeat: -1,
             yoyo: true,
-        });
+        })
     });
 
     return (
