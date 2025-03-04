@@ -58,10 +58,16 @@ export const clientReviews = [
 
 export const myProjects = [
     {
-        title: 'Podcastr - AI Podcast Platform',
-        desc: 'Podcastr is a revolutionary Software-as-a-Service platform that transforms the way podcasts are created. With advanced AI-powered features like text-to-multiple-voices functionality, it allows creators to generate diverse voiceovers from a single text input.',
+        title: 'EASiMAC: Full-Stack Cloud Manufacturing Traceability System',
+        desc: 'Engineered a sophisticated web-based platform that streamlines electronic manufacturing traceability through comprehensive serial number management, MAC address coordination, and test result capture. Built on a modern microservices architecture, EASiMAC delivers real-time production tracking with robust security protocols and seamless API integration capabilities.',
         subdesc:
-            'Built as a unique Software-as-a-Service app with Next.js 14, Tailwind CSS, TypeScript, Framer Motion and Convex, Podcastr is designed for optimal performance and scalability.',
+            'Implemented a hybrid front-end using Vue.js as the primary framework with select React components for specialized functionality\n' +
+            'Developed a Flask-based RESTful API using OpenAPI specification with Connexion middleware for request validation and routing\n' +
+            'Architected a modular backend with dedicated handlers and utility functions for business logic separation\n' +
+            'Designed SQLAlchemy ORM models for efficient database interactions with MySQL on Amazon RDS\n' +
+            'Created comprehensive test suites using pytest with fixtures, mocking, and parameterized testing for unit and integration testing\n' +
+            'Deployed containerized application components on Amazon Lightsail with CI/CD pipelines\n' +
+            'Collaborated with cross-functional development teams to implement secure API endpoints with advanced authorization mechanisms',
         href: 'https://www.youtube.com/watch?v=zfAb95tJvZQ',
         texture: '/textures/project/project1.mp4',
         logo: '/assets/project-logo1.png',
@@ -70,36 +76,52 @@ export const myProjects = [
             border: '0.2px solid #36201D',
             boxShadow: '0px 0px 60px 0px #AA3C304D',
         },
-        spotlight: '/assets/spotlight1.png',
+        spotlight: '/assets/spotlight1.png', // You'll want to update this with an image related to EASiMAC
         tags: [
             {
                 id: 1,
-                name: 'React.js',
-                path: '/assets/react.svg',
+                name: 'Vue.js',
+                path: '/assets/vue.svg', // Update with your Vue.js logo path
             },
             {
                 id: 2,
-                name: 'TailwindCSS',
-                path: 'assets/tailwindcss.png',
+                name: 'Flask',
+                path: 'assets/flask.png', // Update with your Flask logo path
             },
             {
                 id: 3,
-                name: 'TypeScript',
-                path: '/assets/typescript.png',
+                name: 'SQLAlchemy',
+                path: '/assets/sqlalchemy.png', // Update with your SQLAlchemy logo path
             },
             {
                 id: 4,
-                name: 'Framer Motion',
-                path: '/assets/framer.png',
+                name: 'MySQL',
+                path: '/assets/mysql.png', // Update with your MySQL logo path
+            },
+            {
+                id: 5,
+                name: 'AWS',
+                path: '/assets/aws.png', // Update with your AWS logo path
+            },
+            {
+                id: 6,
+                name: 'OpenAPI',
+                path: '/assets/openapi.png', // Update with your OpenAPI logo path
             },
         ],
     },
     {
-        title: 'LiveDoc - Real-Time Google Docs Clone',
-        desc: 'LiveDoc is a powerful collaborative app that elevates the capabilities of real-time document editing. As an enhanced version of Google Docs, It supports millions of collaborators simultaneously, ensuring that every change is captured instantly and accurately.',
+        title: 'DACS: Blockchain Attestation Platform with KYC Integration',
+        desc: 'Developed a comprehensive crypto attestation platform that enables secure digital asset verification with integrated Know Your Customer (KYC) compliance. This full-stack application streamlines the attestation process while maintaining regulatory requirements through a seamless user experience with enterprise-grade security features.',
         subdesc:
-            'With LiveDoc, users can experience the future of collaboration, where multiple contributors work together in real time without any lag, by using Next.js and Liveblocks newest features.',
-        href: 'https://www.youtube.com/watch?v=y5vE8y_f_OM',
+            'Engineered a responsive front-end using React, TypeScript, and Tailwind CSS with AWS Amplify Gen2\n' +
+            'Implemented secure cryptocurrency wallet integration with MetaMask and Ledger hardware wallets\n' +
+            'Integrated Stripe API for seamless payment processing and subscription management\n' +
+            'Built robust backend services using AWS Cognito for authentication, DynamoDB for data persistence, and S3 for document storage\n' +
+            'Created a comprehensive admin dashboard for efficient KYC management and compliance monitoring\n' +
+            'Achieved 100% Jest test coverage through rigorous unit and integration testing methodologies\n' +
+            'Delivered detailed technical documentation for all system components in Confluence',
+        href: 'https://drive.google.com/file/d/1CZVzPEzjobz32Z99wlGfDHxudP32rFpr/view?usp=sharing',
         texture: '/textures/project/project2.mp4',
         logo: '/assets/project-logo2.png',
         logoStyle: {
@@ -111,32 +133,96 @@ export const myProjects = [
         tags: [
             {
                 id: 1,
-                name: 'React.js',
+                name: 'React',
                 path: '/assets/react.svg',
             },
             {
                 id: 2,
-                name: 'TailwindCSS',
-                path: 'assets/tailwindcss.png',
-            },
-            {
-                id: 3,
                 name: 'TypeScript',
                 path: '/assets/typescript.png',
             },
             {
+                id: 3,
+                name: 'AWS Amplify',
+                path: '/assets/aws-amplify.png',
+            },
+            {
                 id: 4,
-                name: 'Framer Motion',
-                path: '/assets/framer.png',
+                name: 'TailwindCSS',
+                path: '/assets/tailwindcss.png',
+            },
+            {
+                id: 5,
+                name: 'Jest',
+                path: '/assets/jest.png',
+            },
+            {
+                id: 6,
+                name: 'Stripe',
+                path: '/assets/stripe.png',
             },
         ],
     },
     {
-        title: 'CarePulse - Health Management System',
-        desc: 'An innovative healthcare platform designed to streamline essential medical processes. It simplifies patient registration, appointment scheduling, and medical record management, providing a seamless experience for both healthcare providers and patients.',
+        title: 'StudyRacer: Award-Winning Gamified Homework Management Platform',
+        desc: 'Designed and developed an innovative web application that transforms academic task management into an engaging competitive experience. This 3rd Prize-winning hackathon project combines gamification elements with productivity tools to help students improve time management and academic performance through friendly competition and immediate feedback.',
         subdesc:
-            'With a focus on efficiency, CarePulse integrantes complex forms and SMS notifications, by using Next.js, Appwrite, Twillio and Sentry that enhance operational workflows.',
-        href: 'https://www.youtube.com/watch?v=lEflo_sc82g',
+            'Built a responsive, interactive frontend using Next.js, TypeScript, and Tailwind CSS in just 30 hours\n' +
+            'Implemented a comprehensive gamification system with leaderboards, badges, and visual rewards to drive student engagement\n' +
+            'Integrated OpenAI GPT-4o for intelligent task verification, ensuring completed work meets academic standards\n' +
+            'Created a streamlined Git workflow to resolve team collaboration challenges and accelerate development\n' +
+            'Designed and developed RESTful API endpoints for efficient data management using Next.js server components\n' +
+            'Structured a SQLite database system to track user progress, task completion, and competitive metrics\n' +
+            'Onboarded team members to Next.js framework, enhancing collective productivity during the time-constrained hackathon',
+        href: 'https://www.youtube.com/watch?v=_Bulh_exZsA',
+        texture: '/textures/project/project4.mp4',
+        logo: '/assets/project-logo4.png',
+        logoStyle: {
+            backgroundColor: '#0E1F38',
+            border: '0.2px solid #0E2D58',
+            boxShadow: '0px 0px 60px 0px #2F67B64D',
+        },
+        spotlight: '/assets/spotlight4.png',
+        tags: [
+            {
+                id: 1,
+                name: 'Next.js',
+                path: '/assets/nextjs.svg',
+            },
+            {
+                id: 2,
+                name: 'TypeScript',
+                path: '/assets/typescript.png',
+            },
+            {
+                id: 3,
+                name: 'Tailwind CSS',
+                path: '/assets/tailwindcss.png',
+            },
+            {
+                id: 4,
+                name: 'OpenAI',
+                path: '/assets/openai.png',
+            },
+            {
+                id: 5,
+                name: 'Hackathon',
+                path: '/assets/hackathon.png',
+            },
+        ],
+    },
+    {
+        title: 'Massimo\'s Bakery: Mobile Group Ordering App (GUXD Capstone)',
+        desc: 'Designed and prototyped a user-focused mobile application that streamlines workplace food ordering for busy professionals. Through comprehensive user research and iterative design, the Massimo\'s Bakery app achieved a 25% improvement in user satisfaction by addressing key pain points of time-constrained workers seeking high-quality food options without waiting in lines.',
+        subdesc:
+            'Conducted in-depth user interviews and created empathy maps to identify core needs of busy professionals\n' +
+            'Developed detailed user personas and journey maps to guide the design process\n' +
+            'Created paper wireframes and digital low-fidelity prototypes to test initial concepts\n' +
+            'Designed high-fidelity prototypes in Figma with a focus on intuitive group ordering functionality\n' +
+            'Implemented accessibility features to ensure the app was usable by all potential customers\n' +
+            'Conducted multiple rounds of usability testing and incorporated feedback through iterative design\n' +
+            'Presented final designs with measurable improvements in user satisfaction metrics',
+        href: 'https://docs.google.com/presentation/d/1YxHMnQpaSlVKc0dMdizpAqdI0t2-vQuEYS4Zh0fjk14/edit?usp=sharing',
         texture: '/textures/project/project3.mp4',
         logo: '/assets/project-logo3.png',
         logoStyle: {
@@ -150,97 +236,28 @@ export const myProjects = [
         tags: [
             {
                 id: 1,
-                name: 'React.js',
-                path: '/assets/react.svg',
+                name: 'Figma',
+                path: '/assets/figma.svg',
             },
             {
                 id: 2,
-                name: 'TailwindCSS',
-                path: 'assets/tailwindcss.png',
+                name: 'UX Research',
+                path: '/assets/ux-research.png',
             },
             {
                 id: 3,
-                name: 'TypeScript',
-                path: '/assets/typescript.png',
+                name: 'Prototyping',
+                path: '/assets/prototype.png',
             },
             {
                 id: 4,
-                name: 'Framer Motion',
-                path: '/assets/framer.png',
-            },
-        ],
-    },
-    {
-        title: 'Horizon - Online Banking Platform',
-        desc: 'Horizon is a comprehensive online banking platform that offers users a centralized finance management dashboard. It allows users to connect multiple bank accounts, monitor real-time transactions, and seamlessly transfer money to other users.',
-        subdesc:
-            'Built with Next.js 14 Appwrite, Dwolla and Plaid, Horizon ensures a smooth and secure banking experience, tailored to meet the needs of modern consumers.',
-        href: 'https://www.youtube.com/watch?v=PuOVqP_cjkE',
-        texture: '/textures/project/project4.mp4',
-        logo: '/assets/project-logo4.png',
-        logoStyle: {
-            backgroundColor: '#0E1F38',
-            border: '0.2px solid #0E2D58',
-            boxShadow: '0px 0px 60px 0px #2F67B64D',
-        },
-        spotlight: '/assets/spotlight4.png',
-        tags: [
-            {
-                id: 1,
-                name: 'React.js',
-                path: '/assets/react.svg',
+                name: 'User Testing',
+                path: '/assets/user-testing.png',
             },
             {
-                id: 2,
-                name: 'TailwindCSS',
-                path: 'assets/tailwindcss.png',
-            },
-            {
-                id: 3,
-                name: 'TypeScript',
-                path: '/assets/typescript.png',
-            },
-            {
-                id: 4,
-                name: 'Framer Motion',
-                path: '/assets/framer.png',
-            },
-        ],
-    },
-    {
-        title: 'Imaginify - AI Photo Manipulation App',
-        desc: 'Imaginify is a groundbreaking Software-as-a-Service application that empowers users to create stunning photo manipulations using AI technology. With features like AI-driven image editing, a payments system, and a credits-based model.',
-        subdesc:
-            'Built with Next.js 14, Cloudinary AI, Clerk, and Stripe, Imaginify combines cutting-edge technology with a user-centric approach. It can be turned into a side income or even a full-fledged business.',
-        href: 'https://www.youtube.com/watch?v=Ahwoks_dawU',
-        texture: '/textures/project/project5.mp4',
-        logo: '/assets/project-logo5.png',
-        logoStyle: {
-            backgroundColor: '#1C1A43',
-            border: '0.2px solid #252262',
-            boxShadow: '0px 0px 60px 0px #635BFF4D',
-        },
-        spotlight: '/assets/spotlight5.png',
-        tags: [
-            {
-                id: 1,
-                name: 'React.js',
-                path: '/assets/react.svg',
-            },
-            {
-                id: 2,
-                name: 'TailwindCSS',
-                path: 'assets/tailwindcss.png',
-            },
-            {
-                id: 3,
-                name: 'TypeScript',
-                path: '/assets/typescript.png',
-            },
-            {
-                id: 4,
-                name: 'Framer Motion',
-                path: '/assets/framer.png',
+                id: 5,
+                name: 'GUXD',
+                path: '/assets/google-ux.png',
             },
         ],
     },
