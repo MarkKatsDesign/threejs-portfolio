@@ -68,7 +68,7 @@ export const myProjects = [
             'Created comprehensive test suites using pytest with fixtures, mocking, and parameterized testing for unit and integration testing\n' +
             'Deployed containerized application components on Amazon Lightsail with CI/CD pipelines\n' +
             'Collaborated with cross-functional development teams to implement secure API endpoints with advanced authorization mechanisms',
-        href: 'https://www.youtube.com/watch?v=zfAb95tJvZQ',
+        href: 'https://drive.google.com/file/d/1NjMsJNw-8Jn-8uMPRM6BRnN9EmS-9dad/view?usp=sharing',
         texture: '/textures/project/project1.mp4',
         logo: '/assets/project-logo1.png',
         logoStyle: {
