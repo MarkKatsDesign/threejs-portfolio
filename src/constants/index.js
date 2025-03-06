@@ -76,37 +76,47 @@ export const myProjects = [
             border: '0.2px solid #36201D',
             boxShadow: '0px 0px 60px 0px #AA3C304D',
         },
-        spotlight: '/assets/spotlight1.png', // You'll want to update this with an image related to EASiMAC
+        spotlight: '/assets/spotlight1.png',
         tags: [
             {
                 id: 1,
                 name: 'Vue.js',
-                path: '/assets/vue.svg', // Update with your Vue.js logo path
+                path: '/assets/vue.svg',
             },
             {
                 id: 2,
-                name: 'Flask',
-                path: 'assets/flask.png', // Update with your Flask logo path
+                name: 'React',
+                path: 'assets/react.svg',
             },
             {
                 id: 3,
-                name: 'SQLAlchemy',
-                path: '/assets/sqlalchemy.png', // Update with your SQLAlchemy logo path
+                name: 'Flask',
+                path: 'assets/flask.svg',
             },
             {
                 id: 4,
-                name: 'MySQL',
-                path: '/assets/mysql.png', // Update with your MySQL logo path
+                name: 'SQLAlchemy',
+                path: '/assets/sqlalchemy.svg',
             },
             {
                 id: 5,
-                name: 'AWS',
-                path: '/assets/aws.png', // Update with your AWS logo path
+                name: 'MySQL',
+                path: '/assets/mysql.svg',
             },
             {
                 id: 6,
+                name: 'AWS',
+                path: '/assets/aws.svg',
+            },
+            {
+                id: 7,
                 name: 'OpenAPI',
-                path: '/assets/openapi.png', // Update with your OpenAPI logo path
+                path: '/assets/openapi.svg',
+            },
+            {
+                id: 8,
+                name: 'Swagger',
+                path: '/assets/swagger.svg',
             },
         ],
     },
@@ -144,7 +154,7 @@ export const myProjects = [
             {
                 id: 3,
                 name: 'AWS Amplify',
-                path: '/assets/aws-amplify.png',
+                path: '/assets/aws.svg',
             },
             {
                 id: 4,
@@ -154,12 +164,12 @@ export const myProjects = [
             {
                 id: 5,
                 name: 'Jest',
-                path: '/assets/jest.png',
+                path: '/assets/jest.svg',
             },
             {
                 id: 6,
                 name: 'Stripe',
-                path: '/assets/stripe.png',
+                path: '/assets/stripe.svg',
             },
         ],
     },
@@ -187,7 +197,7 @@ export const myProjects = [
             {
                 id: 1,
                 name: 'Next.js',
-                path: '/assets/nextjs.svg',
+                path: '/assets/next.svg',
             },
             {
                 id: 2,
@@ -202,12 +212,12 @@ export const myProjects = [
             {
                 id: 4,
                 name: 'OpenAI',
-                path: '/assets/openai.png',
+                path: '/assets/openai.svg',
             },
             {
                 id: 5,
                 name: 'Hackathon',
-                path: '/assets/hackathon.png',
+                path: '/assets/third.svg',
             },
         ],
     },
@@ -242,7 +252,7 @@ export const myProjects = [
             {
                 id: 2,
                 name: 'UX Research',
-                path: '/assets/ux-research.png',
+                path: '/assets/user.png',
             },
             {
                 id: 3,
@@ -251,13 +261,8 @@ export const myProjects = [
             },
             {
                 id: 4,
-                name: 'User Testing',
-                path: '/assets/user-testing.png',
-            },
-            {
-                id: 5,
                 name: 'GUXD',
-                path: '/assets/google-ux.png',
+                path: '/assets/google.svg',
             },
         ],
     },
