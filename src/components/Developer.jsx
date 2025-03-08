@@ -15,14 +15,21 @@ const Developer = ({ animationName = 'idle', ...props }) => {
 
     const { animations: victoryAnimation } = useFBX('/models/animations/victory.fbx');
 
+    const { animations: sittingAnimation } = useFBX('/models/animations/sitting.fbx');
+
+    const { animations: layingAnimation } = useFBX('/models/animations/laying.fbx');
+
+
     // Clone and rename the animation
     idleAnimation[0].name = 'idle';
     saluteAnimation[0].name = 'salute';
     clappingAnimation[0].name = 'clapping';
     victoryAnimation[0].name = 'victory';
+    sittingAnimation[0].name = 'sitting'
+    layingAnimation[0].name = 'laying';
 
     // Set up animations
-    const { actions } = useAnimations([idleAnimation[0], saluteAnimation[0], clappingAnimation[0], victoryAnimation[0]], group);
+    const { actions } = useAnimations([idleAnimation[0], saluteAnimation[0], clappingAnimation[0], victoryAnimation[0], sittingAnimation[0], layingAnimation[0]], group);
 
     useEffect(() => {
         // Check if the animation exists before trying to play it
