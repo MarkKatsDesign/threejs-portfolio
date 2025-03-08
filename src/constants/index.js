@@ -314,7 +314,7 @@ export const workExperiences = [
         duration: 'Nov 2019 - Feb 2020',
         title: "Contributed to the Wenzhou Museum project, developing 2D plans and 3D renders using AutoCAD, Rhino, and SketchUp. Participated in team design discussions and client presentations.",
         icon: '/assets/house.png',
-        animation: 'wave',
+        animation: 'sitting',
     },
     {
         id: 5,
@@ -323,6 +323,6 @@ export const workExperiences = [
         duration: 'Jul 2018 - Aug 2018',
         title: "Developed 3D visualisations for the Duke University Kunshan Phase II master plan using AutoCAD and SketchUp. Collaborated with Perkins & Will on urban design projects.",
         icon: '/assets/city.png',
-        animation: 'thumbs-up',
+        animation: 'laying',
     },
 ];
