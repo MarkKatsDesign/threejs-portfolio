@@ -24,9 +24,9 @@ export const navLinks = [
 export const clientReviews = [
     {
         id: 1,
-        name: 'Emily Johnson',
-        position: 'Marketing Director at GreenLeaf',
-        img: 'assets/review1.png',
+        name: 'Peter Westley',
+        position: 'Engineering Manager at Advatek Lighting',
+        img: 'assets/review1.jpg',
         review:
             'Working with Adrian was a fantastic experience. He transformed our outdated website into a modern, user-friendly platform. His attention to detail and commitment to quality are unmatched. Highly recommend him for any web dev projects.',
     },

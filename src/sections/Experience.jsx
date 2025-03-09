@@ -8,11 +8,6 @@ import Developer from "../components/Developer.jsx";
 const Experience = () => {
     const [animationName, setAnimationName] = useState('idle')
 
-
-
-
-
-
     return (
         <section className="c-space my-20">
            <div className="w-full text-white-600">
