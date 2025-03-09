@@ -1,12 +1,12 @@
-import {clientReviews} from "../constants/index.js";
+import {professionalRecommendations} from "../constants/index.js";
 
 const Clients = () => {
     return (
         <section className="c-space my-20">
-            <h3 className="head-text">Hear from My Clients</h3>
+            <h3 className="head-text">Hear from My Referees</h3>
 
             <div className="client-container">
-                {clientReviews.map(({id, name, review, img, position}) => (
+                {professionalRecommendations.map(({id, name, review, img, position}) => (
                     <div key={id} className="client-review">
                         <div>
                             <p className="text-white font-light">{review}</p>

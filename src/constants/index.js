@@ -21,30 +21,30 @@ export const navLinks = [
     },
 ];
 
-export const clientReviews = [
+export const professionalRecommendations = [
     {
         id: 1,
         name: 'Peter Westley',
         position: 'Engineering Manager at Advatek Lighting',
         img: 'assets/review1.jpg',
         review:
-            'Working with Adrian was a fantastic experience. He transformed our outdated website into a modern, user-friendly platform. His attention to detail and commitment to quality are unmatched. Highly recommend him for any web dev projects.',
+            'Mark\'s technical acumen, collaborative approach, and problem-solving mindset made him an invaluable asset to our team at Advatek Lighting.',
     },
     {
         id: 2,
-        name: 'Mark Rogers',
-        position: 'Founder of TechGear Shop',
+        name: 'Brandon Gobey',
+        position: 'Senior Designer (formerly at DNEG)',
         img: 'assets/review2.png',
         review:
-            'Adrian’s expertise in web development is truly impressive. He delivered a robust and scalable solution for our e-commerce site, and our online sales have significantly increased since the launch. He’s a true professional! Fantastic work.',
+            'I can absolutely vouch for Mark\'s excellent work and great character/work ethic. Always eager to learn and implement cutting-edge techniques and software to better the team around him.',
     },
     {
         id: 3,
-        name: 'John Dohsas',
-        position: 'Project Manager at UrbanTech ',
-        img: 'assets/review3.png',
+        name: 'Yuyi Zhao',
+        position: 'Portfolio Specialist at IDEA (formerly at CPG Corporation)  ',
+        img: 'assets/review3.jpg',
         review:
-            'I can’t say enough good things about Adrian. He was able to take our complex project requirements and turn them into a seamless, functional website. His problem-solving abilities are outstanding.',
+            'During his two-month internship at Futurepolis, Mark demonstrated an exceptional ability to integrate academic knowledge with real-world projects. His innovative ideas, strong teamwork, and willingness to extend his internship showcased his dedication and significantly advanced our projects.',
     },
     {
         id: 4,
