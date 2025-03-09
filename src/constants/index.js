@@ -48,11 +48,11 @@ export const professionalRecommendations = [
     },
     {
         id: 4,
-        name: 'Ether Smith',
-        position: 'CEO of BrightStar Enterprises',
-        img: 'assets/review4.png',
+        name: 'Coming soon',
+        position: 'CEO of Something',
+        img: 'assets/review20.png',
         review:
-            'Adrian was a pleasure to work with. He understood our requirements perfectly and delivered a website that exceeded our expectations. His skills in both frontend backend dev are top-notch.',
+            'Coming soon.',
     },
 ];
 
