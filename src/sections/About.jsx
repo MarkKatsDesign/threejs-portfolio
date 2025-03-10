@@ -62,7 +62,7 @@ const About = () => {
                         </div>
                         <div>
                             <p className="grid-headtext">Location</p>
-                            <p className="grid-subtext">I'm based in Melbourne, Australia, I am open to opportunities in ANZ.</p>
+                            <p className="grid-subtext">I'm based in Melbourne, Australia, I am open to opportunities in A & NZ.</p>
                             <Button name="Contact me" isBeam containerClass="w-full mt-10" />
                         </div>
                     </div>
