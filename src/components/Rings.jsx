@@ -58,3 +58,6 @@ const Rings = ({ position }) => {
 };
 
 export default Rings;
+
+
+

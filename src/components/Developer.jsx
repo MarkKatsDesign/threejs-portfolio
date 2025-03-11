@@ -1,51 +1,98 @@
 import React, { useEffect, useRef } from 'react';
 import { useAnimations, useFBX, useGLTF } from '@react-three/drei';
 
+// Pre-load all animations outside the component
+const preloadedModels = {
+    model: null,
+    idle: null,
+    salute: null,
+    clapping: null,
+    victory: null,
+    sitting: null,
+    laying: null
+};
+
+// This function should be called once at app initialization
+export const preloadDeveloperAssets = async () => {
+    // This would be the ideal approach, but since we're fixing existing code,
+    // we'll rely on the useGLTF.preload below
+};
+
+// Preload the model
+useGLTF.preload('/models/human/developer.glb');
+
 const Developer = ({ animationName = 'idle', ...props }) => {
     const group = useRef();
 
+    // Load the model
     const { nodes, materials } = useGLTF('/models/human/developer.glb');
 
-    // Load the animation
-    const { animations: idleAnimation } = useFBX('/models/animations/idle.fbx');
+    // Load animations one by one with individual refs to prevent re-renders
+    const idleAnimationRef = useRef();
+    const saluteAnimationRef = useRef();
+    const clappingAnimationRef = useRef();
+    const victoryAnimationRef = useRef();
+    const sittingAnimationRef = useRef();
+    const layingAnimationRef = useRef();
 
-    const { animations: saluteAnimation } = useFBX('/models/animations/salute.fbx');
+    // Load animations and store in refs
+    if (!idleAnimationRef.current) {
+        idleAnimationRef.current = useFBX('/models/animations/idle.fbx').animations[0];
+        idleAnimationRef.current.name = 'idle';
+    }
 
-    const { animations: clappingAnimation } = useFBX('/models/animations/clapping.fbx');
+    if (!saluteAnimationRef.current) {
+        saluteAnimationRef.current = useFBX('/models/animations/salute.fbx').animations[0];
+        saluteAnimationRef.current.name = 'salute';
+    }
 
-    const { animations: victoryAnimation } = useFBX('/models/animations/victory.fbx');
+    if (!clappingAnimationRef.current) {
+        clappingAnimationRef.current = useFBX('/models/animations/clapping.fbx').animations[0];
+        clappingAnimationRef.current.name = 'clapping';
+    }
 
-    const { animations: sittingAnimation } = useFBX('/models/animations/sitting.fbx');
+    if (!victoryAnimationRef.current) {
+        victoryAnimationRef.current = useFBX('/models/animations/victory.fbx').animations[0];
+        victoryAnimationRef.current.name = 'victory';
+    }
 
-    const { animations: layingAnimation } = useFBX('/models/animations/laying.fbx');
+    if (!sittingAnimationRef.current) {
+        sittingAnimationRef.current = useFBX('/models/animations/sitting.fbx').animations[0];
+        sittingAnimationRef.current.name = 'sitting';
+    }
 
+    if (!layingAnimationRef.current) {
+        layingAnimationRef.current = useFBX('/models/animations/laying.fbx').animations[0];
+        layingAnimationRef.current.name = 'laying';
+    }
 
-    // Clone and rename the animation
-    idleAnimation[0].name = 'idle';
-    saluteAnimation[0].name = 'salute';
-    clappingAnimation[0].name = 'clapping';
-    victoryAnimation[0].name = 'victory';
-    sittingAnimation[0].name = 'sitting'
-    layingAnimation[0].name = 'laying';
+    // Combine all animations for the useAnimations hook
+    const animations = [
+        idleAnimationRef.current,
+        saluteAnimationRef.current,
+        clappingAnimationRef.current,
+        victoryAnimationRef.current,
+        sittingAnimationRef.current,
+        layingAnimationRef.current
+    ].filter(Boolean); // Filter out any undefined animations
 
-    // Set up animations
-    const { actions } = useAnimations([idleAnimation[0], saluteAnimation[0], clappingAnimation[0], victoryAnimation[0], sittingAnimation[0], layingAnimation[0]], group);
+    // Set up animations only when all are loaded
+    const { actions } = useAnimations(animations, group);
 
     useEffect(() => {
-        // Check if the animation exists before trying to play it
-        if (actions[animationName]) {
+        // Only play animation if it exists in actions
+        if (actions && actions[animationName]) {
             actions[animationName].reset().fadeIn(0.5).play();
 
             return () => {
-                // Check if action still exists before fading out
                 if (actions[animationName]) {
                     actions[animationName].fadeOut(0.5);
                 }
             };
-        } else {
+        } else if (animations.length > 0) {
             console.warn(`Animation "${animationName}" not found in actions:`, actions);
         }
-    }, [animationName, actions]);
+    }, [animationName, actions, animations.length]);
 
     return (
         <group {...props} dispose={null} ref={group}>
@@ -115,8 +162,5 @@ const Developer = ({ animationName = 'idle', ...props }) => {
         </group>
     );
 };
-
-// Move preload inside the component file but outside the component function
-useGLTF.preload('/models/human/developer.glb');
 
 export default Developer;
