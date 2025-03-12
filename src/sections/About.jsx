@@ -88,9 +88,9 @@ const About = () => {
                 <div className="xl:col-span-1 xl:row-span-3">
                     <div className="grid-container">
                         <img
-                            src="/assets/grid1.png"
+                            src="/assets/grid1.jpg"
                             alt="grid-1"
-                            className="w-full sm:h-[276px] h-fit object-contain"
+                            className="w-full sm:h-[276px] h-fit object-cover"
                         />
                         <div>
                             <p className="grid-headtext">Hi, I'm Mark</p>
