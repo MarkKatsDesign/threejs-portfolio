@@ -3,7 +3,8 @@ import {Suspense, useState} from "react";
 import {Canvas} from "@react-three/fiber";
 import {Center, OrbitControls} from "@react-three/drei";
 import CanvasLoader from "../components/CanvasLoader.jsx";
-import DemoComputer from "../components/DemoComputer.jsx";
+// import DemoComputer from "../components/DemoComputer.jsx";
+import Laptop from "../components/Laptop.jsx"
 
 const projectCount = myProjects.length;
 
@@ -69,8 +70,9 @@ const Projects = () => {
                         <directionalLight position={[10, 10, 5]} />
                         <Center>
                             <Suspense fallback={<CanvasLoader />}>
-                                <group scale={2} position={[0, -3, 0]} rotation={[0, -0.1, 0]}>
-                                    <DemoComputer texture={currentProject.texture}/>
+                                <group scale={2} position={[0, -40, -60]} rotation={[0, -0.1, 0]}>
+                                    {/*<DemoComputer texture={currentProject.texture}/>*/}
+                                    {<Laptop texture={currentProject.texture}/>}
                                 </group>
                             </Suspense>
                         </Center>
