@@ -110,7 +110,7 @@ const About = () => {
                         <div>
                             <p className="grid-headtext">Tech Stack</p>
                             <p className="grid-subtext">
-                                Building Future-Ready Applications. 3D Art Meets Technology. Mastering the Full Stack.
+                                Crafting innovative solutions with modern frameworks and 3D technologies. Specialised in full-stack development, from responsive frontends to scalable backend systems. Turning complex problems into elegant digital experiences.
                             </p>
                         </div>
                     </div>
