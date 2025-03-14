@@ -45,13 +45,13 @@ export const myProjects = [
         title: 'EASiMAC: Full-Stack Cloud Manufacturing Traceability System',
         desc: 'Engineered a sophisticated web-based platform that streamlines electronic manufacturing traceability through comprehensive serial number management, MAC address coordination, and test result capture. Built on a modern microservices architecture, EASiMAC delivers real-time production tracking with robust security protocols and seamless API integration capabilities.',
         subdesc:
-            'Implemented a hybrid front-end using Vue.js as the primary framework with select React components for specialized functionality\n' +
+            'Implemented a hybrid front-end using Vue.js as the primary framework with select React components for specialised functionality\n' +
             'Developed a Flask-based RESTful API using OpenAPI specification with Connexion middleware for request validation and routing\n' +
             'Architected a modular backend with dedicated handlers and utility functions for business logic separation\n' +
             'Designed SQLAlchemy ORM models for efficient database interactions with MySQL on Amazon RDS\n' +
             'Created comprehensive test suites using pytest with fixtures, mocking, and parameterized testing for unit and integration testing\n' +
-            'Deployed containerized application components on Amazon Lightsail with CI/CD pipelines\n' +
-            'Collaborated with cross-functional development teams to implement secure API endpoints with advanced authorization mechanisms',
+            'Deployed containerised application components on Amazon Lightsail/EC2 with CI/CD pipelines\n' +
+            'Collaborated with cross-functional development teams to implement secure API endpoints with advanced authorisation mechanisms',
         href: 'https://drive.google.com/file/d/1NjMsJNw-8Jn-8uMPRM6BRnN9EmS-9dad/view?usp=sharing',
         texture: '/textures/project/project1.mp4',
         logo: '/assets/project-logo1.png',
@@ -268,7 +268,7 @@ export const workExperiences = [
         name: 'Advatek Lighting',
         pos: 'Software Engineer',
         duration: 'Dec 2023 - Jul 2024',
-        title: "Built a full-stack web application for managing lighting pixel controllers using React/Vue, Python, and MySQL. Designed microservices with Docker and RESTful APIs, and established CI/CD pipelines that reduced deployment time by 35%.",
+        title: "Built a full-stack web application for managing lighting pixel controllers using React/Vue, Python, and MySQL. Designed Amazon EC2/Lightsail microservices with Docker and RESTful APIs, and established CI/CD pipelines that reduced deployment time by 35%.",
         icon: '/assets/code.png',
         animation: 'victory',
     },
