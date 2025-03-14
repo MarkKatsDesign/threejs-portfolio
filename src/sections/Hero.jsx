@@ -47,7 +47,7 @@ const Hero = () => {
 
                         <OrbitControls
                             enableZoom={false}
-                            enablePan={true}
+                            enablePan={false}
                             autoRotate
                             autoRotateSpeed={isMobile ? 0.5 : 0.3}
                             minPolarAngle={Math.PI / 3}
