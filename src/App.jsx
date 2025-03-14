@@ -9,9 +9,9 @@ import WorkExperience from './sections/Experience.jsx';
 import { Analytics } from "@vercel/analytics/react"
 
 const App = () => {
-    console.log("App component rendered");
+    // console.log("App component rendered");
     return (
-        <main className="max-w-7xl mx-auto relative">
+        <main className="max-w-7xl mx-auto relative w-full overflow-x-hidden">
             <Navbar />
             <div id="home">
                 <Hero />
