@@ -8,7 +8,7 @@ export function Laptop(props) {
     const group = useRef();
     const videoPlane = useRef();
     const { nodes, materials } = useGLTF('/models/laptop.glb');
-    console.log('Loaded GLB model:', { nodes, materials });
+    // Removed console.log for loaded GLB model
 
     // We'll store the computed video geometry dimensions here.
     // They will be computed from the intrinsic video dimensions.
@@ -27,7 +27,7 @@ export function Laptop(props) {
         }
     }, [textureSrc]);
 
-    console.log('Loading video texture from:', textureSrc);
+
 
     const videoTexture = useVideoTexture(textureSrc, {
         unsuspend: 'canplay',
@@ -41,12 +41,8 @@ export function Laptop(props) {
             const video = videoTexture.source.data;
             if (video) {
                 video.addEventListener('loadedmetadata', () => {
-                    console.log('Video metadata loaded:', {
-                        width: video.videoWidth,
-                        height: video.videoHeight,
-                        aspectRatio: video.videoWidth / video.videoHeight,
-                        duration: video.duration
-                    });
+                    // Removed console.log for video metadata
+
                     // Calculate dimensions based on the video's intrinsic size.
                     // Here, we apply a scale factor to convert from pixel dimensions to scene units.
                     const scaleFactor = 0.01; // Adjust this factor to fit your scene's scale
@@ -56,10 +52,12 @@ export function Laptop(props) {
                 });
 
                 video.addEventListener('play', () => {
-                    console.log('Video started playing');
+                    // Removed console.log for video playing
                 });
 
                 video.addEventListener('error', (e) => {
+                    // Keeping error logging since this is important for debugging
+                    // but you can comment this out too if preferred
                     console.error('Video error:', e);
                 });
             }
