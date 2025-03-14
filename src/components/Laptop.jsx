@@ -12,11 +12,21 @@ export function Laptop(props) {
 
     // We'll store the computed video geometry dimensions here.
     // They will be computed from the intrinsic video dimensions.
-    const [videoDimensions, setVideoDimensions] = useState({ width: 30, height: 19 });
+    const [videoDimensions, setVideoDimensions] = useState({ width: 30, height: 19 } );
     // Position for the video plane in front of the laptop screen
     const videoPosition = { x: 0, y: 10.5, z: -10.6 };
 
     const textureSrc = props.texture ? props.texture : '/textures/project/project1.mp4';
+
+    // Check if the textureSrc is project3.mp4 and update dimensions accordingly
+    useEffect(() => {
+        if (textureSrc.includes('project3.mp4')) {
+            setVideoDimensions({ width: 10, height: 20 }); // Set your specific dimensions for project3.mp4
+        } else {
+            setVideoDimensions({ width: 30, height: 19 }); // Default dimensions
+        }
+    }, [textureSrc]);
+
     console.log('Loading video texture from:', textureSrc);
 
     const videoTexture = useVideoTexture(textureSrc, {
@@ -55,6 +65,7 @@ export function Laptop(props) {
             }
         }
     }, [videoTexture]);
+
 
     // Animate the laptop group rotation using GSAP
     useGSAP(() => {
@@ -125,4 +136,3 @@ export function Laptop(props) {
 useGLTF.preload('/models/laptop.glb');
 
 export default Laptop;
-

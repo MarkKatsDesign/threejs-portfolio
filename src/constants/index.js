@@ -170,7 +170,7 @@ export const myProjects = [
             'Onboarded team members to Next.js framework, enhancing collective productivity during the time-constrained hackathon',
         href: 'https://www.youtube.com/watch?v=_Bulh_exZsA',
         texture: '/textures/project/project4.mp4',
-        logo: '/assets/project-logo4.png',
+        logo: '/assets/project-logo3.png',
         logoStyle: {
             backgroundColor: '#0E1F38',
             border: '0.2px solid #0E2D58',
@@ -218,7 +218,7 @@ export const myProjects = [
             'Presented final designs with measurable improvements in user satisfaction metrics',
         href: 'https://docs.google.com/presentation/d/1YxHMnQpaSlVKc0dMdizpAqdI0t2-vQuEYS4Zh0fjk14/edit?usp=sharing',
         texture: '/textures/project/project3.mp4',
-        logo: '/assets/project-logo3.png',
+        logo: '/assets/google.svg',
         logoStyle: {
             backgroundColor: '#60f5a1',
             background:

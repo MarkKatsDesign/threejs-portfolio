@@ -102,11 +102,13 @@ const About = () => {
                 {/* Section 2: Tech Stack */}
                 <div className="col-span-1 xl:row-span-3">
                     <div className="grid-container">
-                        <img
-                            src="/assets/grid2.png"
-                            alt="grid-2"
-                            className="w-full sm:w-[276px] h-fit object-contain"
-                        />
+                        <div className="w-full h-full p-0">
+                            <img
+                                src="/assets/grid2.jpg"
+                                alt="grid-2"
+                                className="w-full h-full object-cover mx-auto"
+                            />
+                        </div>
                         <div>
                             <p className="grid-headtext">Tech Stack</p>
                             <p className="grid-subtext">
@@ -173,9 +175,9 @@ const About = () => {
                 <div className="xl:col-span-2 xl:row-span-3">
                     <div className="grid-container">
                         <img
-                            src="/assets/grid3.png"
+                            src="/assets/grid3.jpg"
                             alt="grid-3"
-                            className="w-full sm:h-[266px] h-fit object-contain"
+                            className="w-full sm:h-[266px] h-full object-cover"
                         />
                         <div>
                             <p className="grid-headtext">Driven by Innovation and Design</p>

@@ -3,7 +3,6 @@ import {Suspense, useState} from "react";
 import {Canvas} from "@react-three/fiber";
 import {Center, OrbitControls} from "@react-three/drei";
 import CanvasLoader from "../components/CanvasLoader.jsx";
-// import DemoComputer from "../components/DemoComputer.jsx";
 import Laptop from "../components/Laptop.jsx"
 
 const projectCount = myProjects.length;
@@ -22,6 +21,7 @@ const Projects = () => {
             }
         });
     };
+
 
     return (
         <section className="c-space my-20">
@@ -71,7 +71,6 @@ const Projects = () => {
                         <Center>
                             <Suspense fallback={<CanvasLoader />}>
                                 <group scale={1.5} position={[0, -15, -35]} rotation={[0, 0, 0]}>
-                                    {/*<DemoComputer texture={currentProject.texture}/>*/}
                                     {<Laptop texture={currentProject.texture}/>}
                                 </group>
                             </Suspense>
