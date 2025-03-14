@@ -29,6 +29,10 @@ const Hero = () => {
             <div className="w-full h-full absolute inset-0">
                 <Canvas
                     className="w-full h-full"
+                    style={{
+                        // position: 'fixed',
+                        pointerEvents: isMobile ? 'none' : 'auto'
+                    }}
                     camera={{
                         position: [0, 0, 35],
                         fov: 70,
