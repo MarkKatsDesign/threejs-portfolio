@@ -161,7 +161,7 @@ export const myProjects = [
         title: 'StudyRacer: Award-Winning Gamified Homework Management Platform',
         desc: 'Designed and developed an innovative web application that transforms academic task management into an engaging competitive experience. This 3rd Prize-winning hackathon project combines gamification elements with productivity tools to help students improve time management and academic performance through friendly competition and immediate feedback.',
         subdesc:
-            'Built a responsive, interactive frontend using Next.js, TypeScript, and Tailwind CSS in just 30 hours\n' +
+            'Built a responsive, interactive frontend using Next.js, TypeScript, and Tailwind CSS in just 30 hours :)\n' +
             'Implemented a comprehensive gamification system with leaderboards, badges, and visual rewards to drive student engagement\n' +
             'Integrated OpenAI GPT-4o for intelligent task verification, ensuring completed work meets academic standards\n' +
             'Created a streamlined Git workflow to resolve team collaboration challenges and accelerate development\n' +
