@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import Globe from "react-globe.gl";
+import Globe from 'react-globe.gl';
 import Button from "../components/Button.jsx";
 import * as THREE from "three";
 
@@ -130,8 +130,8 @@ const About = () => {
                                 backgroundImageOpacity={0.5}
                                 showAtmosphere
                                 showGraticules
-                                globeImageUrl="//unpkg.com/three-globe/example/img/earth-day.jpg"
-                                bumpImageUrl="//unpkg.com/three-globe/example/img/earth-topology.png"
+                                globeImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-day.jpg" // Updated to use local asset
+                                bumpImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-topology.png"  // Updated to use local asset
                                 labelsData={locations}
                                 labelLat="lat"
                                 labelLng="lng"
@@ -225,3 +225,6 @@ const About = () => {
 };
 
 export default About;
+
+
+
