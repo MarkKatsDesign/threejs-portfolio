@@ -7,6 +7,7 @@ import Projects from './sections/Projects.jsx';
 import Footer from "./sections/Footer.jsx";
 import WorkExperience from './sections/Experience.jsx';
 import { Analytics } from "@vercel/analytics/react"
+import { SpeedInsights } from "@vercel/speed-insights/react"
 
 const App = () => {
     // console.log("App component rendered");
@@ -29,6 +30,7 @@ const App = () => {
             </div>
             <Footer />
             <Analytics />
+            <SpeedInsights />
         </main>
     );
 };
