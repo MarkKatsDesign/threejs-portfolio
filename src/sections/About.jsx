@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Globe from 'react-globe.gl';
 import Button from "../components/Button.jsx";
 import * as THREE from "three";
@@ -65,6 +65,55 @@ const About = () => {
         }
     ];
 
+    // Create arcs data - connecting Melbourne to all other cities
+    const arcsData = [
+        // Melbourne to Warsaw
+        {
+            startLat: -37.8136,
+            startLng: 144.9631,
+            endLat: 52.2297,
+            endLng: 21.0122,
+            name: "Melbourne to Warsaw",
+            color: '#FF6347'
+        },
+        // Melbourne to Malaga
+        {
+            startLat: -37.8136,
+            startLng: 144.9631,
+            endLat: 36.7213,
+            endLng: -4.4217,
+            name: "Melbourne to Malaga",
+            color: '#4169E1'
+        },
+        // Melbourne to Suzhou
+        {
+            startLat: -37.8136,
+            startLng: 144.9631,
+            endLat: 31.2998,
+            endLng: 120.5853,
+            name: "Melbourne to Suzhou",
+            color: '#32CD32'
+        },
+        // Melbourne to Moscow
+        {
+            startLat: -37.8136,
+            startLng: 144.9631,
+            endLat: 55.7558,
+            endLng: 37.6173,
+            name: "Melbourne to Moscow",
+            color: '#FFD700'
+        },
+        // Melbourne to Jakarta
+        {
+            startLat: -37.8136,
+            startLng: 144.9631,
+            endLat: -6.2088,
+            endLng: 106.8456,
+            name: "Melbourne to Jakarta",
+            color: '#9370DB'
+        }
+    ];
+
     // Updated customThreeObjectUpdate to use ref
     const handleCustomObjectUpdate = (obj, d) => {
         if (globeRef.current) {
@@ -72,6 +121,19 @@ const About = () => {
             Object.assign(obj.position, coords);
         }
     };
+
+    // Initialize globe with rotation animation
+    useEffect(() => {
+        if (globeRef.current) {
+            // Set initial position focused on Melbourne
+            globeRef.current.pointOfView({ lat: -37.8136, lng: 144.9631, altitude: 2.5 }, 1000);
+
+            // Auto-rotation
+            const controls = globeRef.current.controls();
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 0.5;
+        }
+    }, []);
 
     const scrollToContact = () => {
         const contactSection = document.getElementById('contact');

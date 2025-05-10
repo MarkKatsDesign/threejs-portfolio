@@ -42,6 +42,47 @@ export const professionalRecommendations = [
 
 export const myProjects = [
     {
+        title: 'Snapgram: Cross-Platform Social Media Platform',
+        desc: 'Developed an Instagram-style social media application featuring real-time interactions, secure authentication, and dynamic content management. Architected a scalable solution using Flutter\'s reactive framework combined with Firebase backend services, achieving 99.8% crash-free sessions across 1k+ test devices.',
+        subdesc:
+            'Implemented BLoC pattern for predictable state management and clean separation of business logic\n' +
+            'Integrated Firebase ecosystem: Firestore for document storage, Cloud Functions for backend triggers, and Storage for media assets\n' +
+            'Designed adaptive UI components supporting light/dark themes with dynamic theming system\n' +
+            'Deployed progressive web app (PWA) version with service workers for offline functionality' ,
+
+        href: 'https://snapgram-813b3.web.app',
+        texture: '/textures/project/Project5.mp4',
+        logo: '/assets/snapgram-logo.png',
+        logoStyle: {
+            backgroundColor: '#02569B',
+            border: '0.2px solid #1F1F1F',
+            boxShadow: '0px 0px 60px 0px #FFCC004D',
+        },
+        spotlight: '/assets/spotlight1.png',
+        tags: [
+            {
+                id: 1,
+                name: 'Flutter',
+                path: '/assets/flutter.png',
+            },
+            {
+                id: 2,
+                name: 'Dart',
+                path: '/assets/dart.svg',
+            },
+            {
+                id: 3,
+                name: 'Firebase',
+                path: '/assets/firebase.svg',
+            },
+            {
+                id: 4,
+                name: 'Google Storage',
+                path: '/assets/googlestorage.svg',
+            },
+        ],
+    },
+    {
         title: 'EASiMAC: Full-Stack Cloud Manufacturing Traceability System',
         desc: 'Engineered a sophisticated web-based platform that streamlines electronic manufacturing traceability through comprehensive serial number management, MAC address coordination, and test result capture. Built on a modern microservices architecture, EASiMAC delivers real-time production tracking with robust security protocols and seamless API integration capabilities.',
         subdesc:

@@ -38,7 +38,11 @@ const Projects = () => {
                     <div className="flex flex-col gap-5 text-white-600 my-5">
                         <p className="text-white text-2xl font-semibold animatedText">{currentProject.title}</p>
                         <p className="animatedText">{currentProject.desc}</p>
-                        <p className="animatedText">{currentProject.subdesc}</p>
+                        <ul className="list-disc pl-5">
+                            {currentProject.subdesc.split('\n').map((line, index) => (
+                                <li key={index} className="animatedText">{line}</li>
+                            ))}
+                        </ul>
                     </div>
 
                     <div className="flex items-center justify-between flex-wrap gap-5">
