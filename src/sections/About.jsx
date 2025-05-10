@@ -1,7 +1,7 @@
 import React, {useState, useRef, useEffect} from 'react';
 import Globe from 'react-globe.gl';
 import Button from "../components/Button.jsx";
-import * as THREE from "three";
+
 
 const About = () => {
     const [hasCopied, setHasCopied] = useState(false);
@@ -67,41 +67,37 @@ const About = () => {
 
     // Create arcs data - connecting Melbourne to all other cities
     const arcsData = [
-        // Melbourne to Warsaw
+        // Moscow to Malaga
         {
-            startLat: -37.8136,
-            startLng: 144.9631,
-            endLat: 52.2297,
-            endLng: 21.0122,
-            name: "Melbourne to Warsaw",
-            color: '#FF6347'
-        },
-        // Melbourne to Malaga
-        {
-            startLat: -37.8136,
-            startLng: 144.9631,
+            startLat: 55.7558,
+            startLng: 37.6173,
             endLat: 36.7213,
             endLng: -4.4217,
-            name: "Melbourne to Malaga",
-            color: '#4169E1'
+            color: '#FF69B4' // Hot pink
         },
-        // Melbourne to Suzhou
+        // Malaga to Suzhou
         {
-            startLat: -37.8136,
-            startLng: 144.9631,
+            startLat: 36.7213,
+            startLng: -4.4217,
             endLat: 31.2998,
             endLng: 120.5853,
-            name: "Melbourne to Suzhou",
-            color: '#32CD32'
+            color: '#FFA500' // Orange
         },
-        // Melbourne to Moscow
+        // Suzhou to Warsaw
         {
-            startLat: -37.8136,
-            startLng: 144.9631,
-            endLat: 55.7558,
-            endLng: 37.6173,
-            name: "Melbourne to Moscow",
-            color: '#FFD700'
+            startLat: 31.2998,
+            startLng: 120.5853,
+            endLat: 52.2297,
+            endLng: 21.0122,
+            color: '#32CD32' // Lime green
+        },
+        // Warsaw to Melbourne
+        {
+            startLat: 52.2297,
+            startLng: 21.0122,
+            endLat: -37.8136,
+            endLng: 144.9631,
+            color: '#00BFFF' // Deep sky blue
         },
         // Melbourne to Jakarta
         {
@@ -109,18 +105,9 @@ const About = () => {
             startLng: 144.9631,
             endLat: -6.2088,
             endLng: 106.8456,
-            name: "Melbourne to Jakarta",
-            color: '#9370DB'
+            color: '#9370DB' // Medium purple
         }
     ];
-
-    // Updated customThreeObjectUpdate to use ref
-    const handleCustomObjectUpdate = (obj, d) => {
-        if (globeRef.current) {
-            const coords = globeRef.current.getCoords(d.lat, d.lng, 0);
-            Object.assign(obj.position, coords);
-        }
-    };
 
     // Initialize globe with rotation animation
     useEffect(() => {
@@ -192,8 +179,8 @@ const About = () => {
                                 backgroundImageOpacity={0.5}
                                 showAtmosphere
                                 showGraticules
-                                globeImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-day.jpg" // Updated to use local asset
-                                bumpImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-topology.png"  // Updated to use local asset
+                                globeImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-day.jpg"
+                                bumpImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-topology.png"
                                 labelsData={locations}
                                 labelLat="lat"
                                 labelLng="lng"
@@ -206,21 +193,16 @@ const About = () => {
                                 labelDotRadius={0.4}
                                 labelLabel={(d) => `${d.text}`}
                                 onLabelClick={(label) => console.log(`Clicked on ${label.text}`)}
-                                ringsData={[locations[0]]}
-                                ringColor={() => 'rgba(0, 255, 0, 0.5)'}
-                                ringMaxRadius={5}
-                                customLayerData={[locations[0]]}
-                                customThreeObject={() => {
-                                    const line = new THREE.Line(
-                                        new THREE.BufferGeometry().setFromPoints([
-                                            new THREE.Vector3(0, 0, 0),
-                                            new THREE.Vector3(0, 1.5, 0)
-                                        ]),
-                                        new THREE.LineBasicMaterial({ color: 0x00ff00, linewidth: 3 })
-                                    );
-                                    return line;
-                                }}
-                                customThreeObjectUpdate={handleCustomObjectUpdate}
+
+                                // Add these arc configurations
+                                arcsData={arcsData}
+                                arcColor={(d) => d.color || 'rgba(255, 255, 255, 0.4)'}
+                                arcStroke={0.5}
+                                arcDashLength={0.01}
+                                arcDashGap={0.01}
+                                arcDashAnimateTime={1000}
+                                arcAltitude={0.35}
+                                arcCircularResolution={64}
                             />
                         </div>
                         <div>
