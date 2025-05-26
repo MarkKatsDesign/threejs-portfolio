@@ -2,12 +2,12 @@ import Hero from './sections/Hero.jsx';
 import Navbar from './sections/Navbar.jsx';
 import About from './sections/About.jsx';
 import Contact from './sections/Contact.jsx';
-import Clients from './sections/Clients.jsx';
 import Projects from './sections/Projects.jsx';
 import Footer from "./sections/Footer.jsx";
-import WorkExperience from './sections/Experience.jsx';
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import Referees from "./sections/Referees.jsx";
+import CareerEvolution from "./sections/CareerEvolution.jsx";
 
 const App = () => {
     // console.log("App component rendered");
@@ -20,10 +20,12 @@ const App = () => {
             <div id="about">
                 <About />
             </div>
-            <div id="work">
+            <div id="projects">
                 <Projects />
-                <Clients />
-                <WorkExperience />
+                <Referees />
+            </div>
+            <div id="career-evolution">
+                <CareerEvolution />
             </div>
             <div id="contact">
                 <Contact />

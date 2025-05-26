@@ -1,6 +1,6 @@
 import {professionalRecommendations} from "../constants/index.js";
 
-const Clients = () => {
+const Referees = () => {
     return (
         <section className="c-space my-20">
             <h3 className="head-text">Hear from My Referees</h3>
@@ -32,4 +32,4 @@ const Clients = () => {
     );
 };
 
-export default Clients;
+export default Referees;

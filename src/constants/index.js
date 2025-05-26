@@ -1,7 +1,8 @@
 export const navLinks = [
     { id: "home", name: "Home", href: "#home" },
     { id: "about", name: "About", href: "#about" },
-    { id: "work", name: "Work", href: "#work" },
+    { id: "projects", name: "Projects", href: "#projects" },
+    { id: "career-evolution", name: "Career Evolution", href: "#career-evolution" },
     { id: "contact", name: "Contact", href: "#contact" }
 ];
 
@@ -41,6 +42,47 @@ export const professionalRecommendations = [
 ];
 
 export const myProjects = [
+    {
+        title: 'FILM Dex: A Minimalist IMDB Clone',
+        desc: 'A streamlined movie app delivering a modern, clutter-free IMDB experience. Built with React Native and TypeScript, FILM Dex focuses on intuitive design and essential features to help users discover and enjoy movies effortlessly.',
+        subdesc:
+            'Cross-Platform Development: Created with Expo Go, ensuring quick testing and deployment across devices.\n' +
+            'Dynamic Movie Exploration: View top trending movies, access the latest releases fetched straight from IMDB, search for any movie, and watch trailers.\n' +
+            'User-Centric Features: Enjoy secure authentication, manage your watchlist, and edit account details seamlessly with Appwrite.\n' +
+            'Clean & Modern UI: Designed to remove unnecessary clutter, letting you focus on what matters most—your movie experience.',
+        href: 'https://drive.google.com/file/d/1V7tQ02M0s_QWY0NCYHnx-A-aD-vRxbZe/view?usp=drive_link',
+        texture: '/textures/project/project6.mp4',
+        logo: '/assets/filmdex-logo.png',
+        logoStyle: {
+            backgroundColor: '#1d1d1d',
+            border: '0.2px solid #ffffff',
+            boxShadow: '0px 0px 60px 0px rgba(255,204,0,0.3)',
+        },
+        spotlight: '/assets/spotlight2.png',
+        tags: [
+            {
+                id: 1,
+                name: 'React Native',
+                path: '/assets/react.svg',
+            },
+            {
+                id: 2,
+                name: 'TypeScript',
+                path: '/assets/typescript.png',
+            },
+            {
+                id: 3,
+                name: 'Expo Go',
+                path: '/assets/expo.png',
+            },
+            {
+                id: 4,
+                name: 'Appwrite',
+                path: '/assets/appwrite.png',
+            },
+        ],
+        qrHref: '/assets/filmdexqr.png',
+    },
     {
         title: 'Snapgram: Cross-Platform Social Media Platform',
         desc: 'Developed an Instagram-style social media application featuring real-time interactions, secure authentication, and dynamic content management. Architected a scalable solution using Flutter\'s reactive framework combined with Firebase backend services, achieving 99.8% crash-free sessions across 1k+ test devices.',

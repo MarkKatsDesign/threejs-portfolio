@@ -25,7 +25,7 @@ const Projects = () => {
 
     return (
         <section className="c-space my-20">
-            <p className="head-text">My Work</p>
+            <p className="head-text">My Projects</p>
 
             <div className="grid lg:grid-cols-2 grid-cols-1 mt-12 gap-5 w-full">
                 <div className="flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200">
@@ -33,7 +33,7 @@ const Projects = () => {
                         <img src={currentProject.spotlight} alt="spotlight" className="w-full h-96 object-cover rounded-xl" />
                     </div>
                     <div className="p-3 backdrop-filter backdrop-blur-3xl w-fit rounded-lg" style={currentProject.logoStyle}>
-                        <img src={currentProject.logo} alt="logo" className="w-10 h-10 shadow-sm" />
+                        <img src={currentProject.logo} alt="logo" className="logo-box" />
                     </div>
                     <div className="flex flex-col gap-5 text-white-600 my-5">
                         <p className="text-white text-2xl font-semibold animatedText">{currentProject.title}</p>
@@ -58,6 +58,17 @@ const Projects = () => {
                             <p>Check Demo Here</p>
                             <img src="/assets/arrow-up.png" className="w-3 h-3" alt="arrow" />
                         </a>
+                        {currentProject.qrHref && (
+                            <a
+                                className="flex items-center gap-2 cursor-pointer text-white-600 mt-2"
+                                href={currentProject.qrHref}
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <p>Scan QR for Expo App</p>
+                                <img src="/assets/filmdexqr.png" className="w-4 h-4" alt="qr" />
+                            </a>
+                        )}
                     </div>
                     <div className="flex justify-between items-center mt-7">
                         <button className="arrow-btn" onClick={() => handleNavigation('previous')}>
