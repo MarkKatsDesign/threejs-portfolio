@@ -1,5 +1,5 @@
 import { OrbitControls } from "@react-three/drei";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import CanvasLoader from "../components/CanvasLoader.jsx";
 import { Canvas } from "@react-three/fiber";
 import { useMediaQuery } from "react-responsive";

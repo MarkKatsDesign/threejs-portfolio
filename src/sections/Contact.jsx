@@ -24,8 +24,8 @@ const Contact = () => {
 
         try {
             await emailjs.send(
-                'service_5w1tt8f',
-                'template_963f9le',
+                import.meta.env.VITE_EMAILJS_SERVICE_ID,
+                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
                 {
                     from_name: form.name,
                     to_name: 'Mark',
@@ -33,7 +33,7 @@ const Contact = () => {
                     to_email: 'mark.kats.career@gmail.com',
                     message: form.message
                 },
-                'YLp4iKd41ueZEtZiG'
+                import.meta.env.VITE_EMAILJS_PUBLIC_KEY
                 )
 
             setLoading(false)
@@ -60,9 +60,9 @@ const Contact = () => {
             <div className="relative min-h-screen flex items-center justify-center flex-col">
             <img src="/assets/terminal.png" alt="terminal background" className="absolute inset-0 min-h-screen"/>
                 <div className="contact-container">
-                    <h3 className="head-text">Let's talk</h3>
+                    <h3 className="head-text">Let&#39;s talk</h3>
                     <p className="text-lg text-white-600 mt-3">
-                        I'm always open to new projects, collaborations, or employment opportunities. Let's connect!
+                        I&#39;m always open to new projects, collaborations, or employment opportunities. Let&#39;s connect!
                     </p>
                     <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col space-y-7">
                         <label className='space-y-3'>

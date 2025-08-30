@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import {useState, useRef, useEffect} from 'react';
 import Globe from 'react-globe.gl';
 import Button from "../components/Button.jsx";
 
@@ -141,7 +141,7 @@ const About = () => {
                             className="w-full sm:h-[276px] h-fit object-cover"
                         />
                         <div>
-                            <p className="grid-headtext">Hi, I'm Mark</p>
+                            <p className="grid-headtext">Hi, I&#39;m Mark</p>
                             <p className="grid-subtext">Versatile Full Stack Developer & Digital Designer.</p>
                         </div>
                     </div>

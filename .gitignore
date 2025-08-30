@@ -16,6 +16,10 @@ package-lock.json
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/css_custom_data.json
+# Exclude personal VS Code settings (uncomment if you want to keep private)
+# .vscode/settings.json
 .idea
 .DS_Store
 *.suo
@@ -23,3 +27,13 @@ package-lock.json
 *.njsproj
 *.sln
 *.sw?
+
+# Private documentation (for personal use only)
+TECHNICAL_DOCUMENTATION.md
+
+# Environment variables
+.env
+.env.local
+
+# Claude Code configuration (personal development settings)
+.claude/
