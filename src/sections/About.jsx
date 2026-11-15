@@ -6,6 +6,16 @@ import Button from "../components/Button.jsx";
 const Globe = lazy(() => import('react-globe.gl'));
 
 const EMAIL = 'mark.kats.career@gmail.com';
+
+const FOCUS_AREAS = [
+    'AI-assisted development with GitHub Copilot',
+    'Code security: CodeQL, secret scanning, Dependabot',
+    'DevSecOps on GitHub Enterprise & Azure DevOps',
+    'Agentic AI & MCP',
+    'Azure architecture',
+];
+
+const HANDS_ON = ['TypeScript', 'React', 'Node.js', 'Python', 'Three.js / WebGL', 'Azure', 'AWS', 'Docker', 'Terraform'];
 const GLOBE_SIZE = 326;
 
 // Locations shown on the globe
@@ -158,13 +168,18 @@ const About = () => {
                 <div className="xl:col-span-1 xl:row-span-3">
                     <div className="grid-container">
                         <img
-                            src="/assets/grid1.jpg"
-                            alt="grid-1"
-                            className="w-full sm:h-[276px] h-fit object-cover"
+                            src="/assets/portrait.webp"
+                            alt="Mark Kats"
+                            width={900}
+                            height={1200}
+                            className="w-full sm:h-[276px] h-80 object-cover object-[50%_35%] rounded-lg"
                         />
                         <div>
                             <p className="grid-headtext">Hi, I&#39;m Mark</p>
-                            <p className="grid-subtext">Versatile Full Stack Developer & Digital Designer.</p>
+                            <p className="grid-subtext">
+                                Software Solution Engineer at Microsoft. I help engineering teams ship faster and more
+                                securely with AI, and I build the AI tools I talk about.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -175,14 +190,22 @@ const About = () => {
                         <div className="w-full h-full p-0">
                             <img
                                 src="/assets/grid2.jpg"
-                                alt="grid-2"
-                                className="w-full h-full object-cover mx-auto"
+                                alt=""
+                                className="w-full sm:h-[200px] h-fit object-cover mx-auto rounded-lg"
                             />
                         </div>
                         <div>
-                            <p className="grid-headtext">Tech Stack</p>
-                            <p className="grid-subtext">
-                                Crafting innovative solutions with modern frameworks and 3D technologies. Specialised in full-stack development, from responsive frontends to scalable backend systems. Turning complex problems into elegant digital experiences.
+                            <p className="grid-headtext">What I focus on</p>
+                            <ul className="grid-subtext space-y-1.5">
+                                {FOCUS_AREAS.map((area) => (
+                                    <li key={area} className="flex gap-2">
+                                        <span className="text-[#e0b052]">▹</span>
+                                        {area}
+                                    </li>
+                                ))}
+                            </ul>
+                            <p className="grid-subtext text-sm mt-4">
+                                <span className="text-white-700">Hands-on with:</span> {HANDS_ON.join(" · ")}
                             </p>
                         </div>
                     </div>
@@ -229,11 +252,12 @@ const About = () => {
                             </Suspense>
                         </div>
                         <div>
-                            <p className="grid-headtext">Location</p>
+                            <p className="grid-headtext">Based in Melbourne</p>
                             <p className="grid-subtext">
-                                Based in Melbourne, Australia, I am actively seeking opportunities across Australia and New Zealand.
+                                Working with enterprise engineering teams across Australia. My path has run through Europe
+                                and Asia, and I speak English, Spanish, Russian and Chinese.
                             </p>
-                            <Button name="Available for opportunities" isBeam containerClass="w-full mt-10" onClick={scrollToContact}/>
+                            <Button name="Get in touch" containerClass="w-full mt-10" onClick={scrollToContact}/>
                         </div>
                     </div>
                 </div>
@@ -243,15 +267,19 @@ const About = () => {
                     <div className="grid-container">
                         <img
                             src="/assets/grid3.jpg"
-                            alt="grid-3"
+                            alt=""
                             className="w-full sm:h-[266px] h-full object-cover"
                         />
                         <div>
-                            <p className="grid-headtext">Driven by Innovation and Design</p>
+                            <p className="grid-headtext">From 3D to developer tools</p>
                             <p className="grid-subtext">
-                                With a unique blend of technical expertise and creative vision, I thrive at the intersection of technology and design.
-                                From crafting immersive digital experiences to building scalable solutions, I am passionate about pushing boundaries
-                                and creating meaningful impact through my work.
+                                I came to software from 3D. I spent 3+ years in architectural visualisation and on a large-scale
+                                metaverse build, alongside creatives whose credits include DNEG, Nike and Zaha Hadid Architects,
+                                then completed a Master of IT with Distinction at RMIT.
+                            </p>
+                            <p className="grid-subtext mt-3">
+                                That mix of design and engineering is why I care about how developers actually experience
+                                their tools, not just what the tools can do.
                             </p>
                         </div>
                     </div>
@@ -262,7 +290,7 @@ const About = () => {
                     <div className="grid-container">
                         <img
                             src="/assets/grid4.jpg"
-                            alt="grid-4"
+                            alt=""
                             className="w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top"
                         />
                         <div className="space-y-2">

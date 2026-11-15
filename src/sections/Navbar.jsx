@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { navLinks } from "../constants/index.js";
 
 const NavItems = ({ activeNav, onNavClick }) => (
@@ -23,6 +23,21 @@ const NavItems = ({ activeNav, onNavClick }) => (
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeNav, setActiveNav] = useState('home');
+
+    // Highlight the section currently in the middle of the viewport.
+    useEffect(() => {
+        const sections = navLinks.map(({ id }) => document.getElementById(id)).filter(Boolean);
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) setActiveNav(entry.target.id);
+                });
+            },
+            { rootMargin: '-45% 0px -50% 0px' },
+        );
+        sections.forEach((section) => observer.observe(section));
+        return () => observer.disconnect();
+    }, []);
 
     const toggleMenu = () => setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
 

@@ -1,8 +1,8 @@
 export const navLinks = [
     { id: "home", name: "Home", href: "#home" },
     { id: "about", name: "About", href: "#about" },
+    { id: "experience", name: "Experience", href: "#experience" },
     { id: "projects", name: "Projects", href: "#projects" },
-    { id: "career-evolution", name: "Career Evolution", href: "#career-evolution" },
     { id: "contact", name: "Contact", href: "#contact" }
 ];
 
@@ -26,44 +26,60 @@ export const professionalRecommendations = [
     {
         id: 3,
         name: 'Yuyi Zhao',
-        position: 'Portfolio Specialist at IDEA (formerly at CPG Corporation)  ',
+        position: 'Portfolio Specialist at IDEA (formerly at CPG Corporation)',
         img: 'assets/review3.jpg',
         review:
             'During his two-month internship at Futurepolis, Mark demonstrated an exceptional ability to integrate academic knowledge with real-world projects. His innovative ideas, strong teamwork, and willingness to extend his internship showcased his dedication and significantly advanced our projects.',
     },
-    {
-        id: 4,
-        name: 'Coming soon',
-        position: 'CEO of Something',
-        img: 'assets/review20.png',
-        review:
-            'Coming soon.',
-    },
 ];
+
+export const recognition = {
+    featured: {
+        event: 'Microsoft Hackathon 2026',
+        title: '1st Place · Challenge Winner',
+        description:
+            'Took first place in my challenge at the Microsoft Hackathon, the company-wide event where Microsoft employees build and pitch new ideas.',
+    },
+    more: [
+        {
+            id: 'studyracer',
+            title: '3rd Prize, 30-hour hackathon',
+            detail: 'StudyRacer: a gamified homework platform with AI task verification (Next.js, TypeScript, OpenAI GPT-4o).',
+        },
+        {
+            id: 'rmit',
+            title: 'Master of Information Technology, with Distinction',
+            detail: 'RMIT University, Melbourne (2023 – 2024).',
+        },
+    ],
+};
 
 export const myProjects = [
     {
-        title: 'FILM Dex: A Minimalist IMDB Clone',
-        desc: 'A streamlined movie app delivering a modern, clutter-free IMDB experience. Built with React Native and TypeScript, FILM Dex focuses on intuitive design and essential features to help users discover and enjoy movies effortlessly.',
+        title: 'StudyRacer: Award-Winning Gamified Homework Management Platform',
+        desc: 'Designed and developed an innovative web application that transforms academic task management into an engaging competitive experience. This 3rd Prize-winning hackathon project combines gamification elements with productivity tools to help students improve time management and academic performance through friendly competition and immediate feedback.',
         subdesc:
-            'Cross-Platform Development: Created with Expo Go, ensuring quick testing and deployment across devices.\n' +
-            'Dynamic Movie Exploration: View top trending movies, access the latest releases fetched straight from IMDB, search for any movie, and watch trailers.\n' +
-            'User-Centric Features: Enjoy secure authentication, manage your watchlist, and edit account details seamlessly with Appwrite.\n' +
-            'Clean & Modern UI: Designed to remove unnecessary clutter, letting you focus on what matters most—your movie experience.',
-        href: 'https://drive.google.com/file/d/1V7tQ02M0s_QWY0NCYHnx-A-aD-vRxbZe/view?usp=drive_link',
-        texture: '/textures/project/project6.mp4',
-        logo: '/assets/filmdex-logo.png',
+            'Built a responsive, interactive frontend using Next.js, TypeScript, and Tailwind CSS in just 30 hours :)\n' +
+            'Implemented a comprehensive gamification system with leaderboards, badges, and visual rewards to drive student engagement\n' +
+            'Integrated OpenAI GPT-4o for intelligent task verification, ensuring completed work meets academic standards\n' +
+            'Created a streamlined Git workflow to resolve team collaboration challenges and accelerate development\n' +
+            'Designed and developed RESTful API endpoints for efficient data management using Next.js server components\n' +
+            'Structured a SQLite database system to track user progress, task completion, and competitive metrics\n' +
+            'Onboarded team members to Next.js framework, enhancing collective productivity during the time-constrained hackathon',
+        href: 'https://www.youtube.com/watch?v=_Bulh_exZsA',
+        texture: '/textures/project/project4.mp4',
+        logo: '/assets/project-logo3.png',
         logoStyle: {
-            backgroundColor: '#1d1d1d',
-            border: '0.2px solid #ffffff',
-            boxShadow: '0px 0px 60px 0px rgba(255,204,0,0.3)',
+            backgroundColor: '#0E1F38',
+            border: '0.2px solid #0E2D58',
+            boxShadow: '0px 0px 60px 0px #2F67B64D',
         },
-        spotlight: '/assets/spotlight2.png',
+        spotlight: '/assets/spotlight4.png',
         tags: [
             {
                 id: 1,
-                name: 'React Native',
-                path: '/assets/react.svg',
+                name: 'Next.js',
+                path: '/assets/next.svg',
             },
             {
                 id: 2,
@@ -72,61 +88,24 @@ export const myProjects = [
             },
             {
                 id: 3,
-                name: 'Expo Go',
-                path: '/assets/expo.png',
+                name: 'Tailwind CSS',
+                path: '/assets/tailwindcss.png',
             },
             {
                 id: 4,
-                name: 'Appwrite',
-                path: '/assets/appwrite.png',
-            },
-        ],
-        qrHref: '/assets/filmdexqr.png',
-    },
-    {
-        title: 'Snapgram: Cross-Platform Social Media Platform',
-        desc: 'Developed an Instagram-style social media application featuring real-time interactions, secure authentication, and dynamic content management. Architected a scalable solution using Flutter\'s reactive framework combined with Firebase backend services, achieving 99.8% crash-free sessions across 1k+ test devices.',
-        subdesc:
-            'Implemented BLoC pattern for predictable state management and clean separation of business logic\n' +
-            'Integrated Firebase ecosystem: Firestore for document storage, Cloud Functions for backend triggers, and Storage for media assets\n' +
-            'Designed adaptive UI components supporting light/dark themes with dynamic theming system\n' +
-            'Deployed progressive web app (PWA) version with service workers for offline functionality' ,
-
-        href: 'https://snapgram-813b3.web.app',
-        texture: '/textures/project/Project5.mp4',
-        logo: '/assets/snapgram-logo.png',
-        logoStyle: {
-            backgroundColor: '#02569B',
-            border: '0.2px solid #1F1F1F',
-            boxShadow: '0px 0px 60px 0px #FFCC004D',
-        },
-        spotlight: '/assets/spotlight1.png',
-        tags: [
-            {
-                id: 1,
-                name: 'Flutter',
-                path: '/assets/flutter.png',
+                name: 'OpenAI',
+                path: '/assets/openai.svg',
             },
             {
-                id: 2,
-                name: 'Dart',
-                path: '/assets/dart.svg',
-            },
-            {
-                id: 3,
-                name: 'Firebase',
-                path: '/assets/firebase.svg',
-            },
-            {
-                id: 4,
-                name: 'Google Storage',
-                path: '/assets/googlestorage.svg',
+                id: 5,
+                name: 'Hackathon',
+                path: '/assets/third.svg',
             },
         ],
     },
     {
         title: 'EASiMAC: Full-Stack Cloud Manufacturing Traceability System',
-        desc: 'Engineered a sophisticated web-based platform that streamlines electronic manufacturing traceability through comprehensive serial number management, MAC address coordination, and test result capture. Built on a modern microservices architecture, EASiMAC delivers real-time production tracking with robust security protocols and seamless API integration capabilities.',
+        desc: 'Replaced a manual, spreadsheet-based process at Advatek Lighting with a web platform for electronics manufacturing traceability: serial number management, MAC address allocation and test result capture. It boosted operational efficiency by 30%, cut errors by 45% and removed 8+ hours of manual work a day.',
         subdesc:
             'Implemented a hybrid front-end using Vue.js as the primary framework with select React components for specialised functionality\n' +
             'Developed a Flask-based RESTful API using OpenAPI specification with Connexion middleware for request validation and routing\n' +
@@ -241,30 +220,68 @@ export const myProjects = [
         ],
     },
     {
-        title: 'StudyRacer: Award-Winning Gamified Homework Management Platform',
-        desc: 'Designed and developed an innovative web application that transforms academic task management into an engaging competitive experience. This 3rd Prize-winning hackathon project combines gamification elements with productivity tools to help students improve time management and academic performance through friendly competition and immediate feedback.',
+        title: 'Snapgram: Cross-Platform Social Media Platform',
+        desc: 'Developed an Instagram-style social media application featuring real-time interactions, secure authentication, and dynamic content management. Architected a scalable solution using Flutter\'s reactive framework combined with Firebase backend services, achieving 99.8% crash-free sessions across 1k+ test devices.',
         subdesc:
-            'Built a responsive, interactive frontend using Next.js, TypeScript, and Tailwind CSS in just 30 hours :)\n' +
-            'Implemented a comprehensive gamification system with leaderboards, badges, and visual rewards to drive student engagement\n' +
-            'Integrated OpenAI GPT-4o for intelligent task verification, ensuring completed work meets academic standards\n' +
-            'Created a streamlined Git workflow to resolve team collaboration challenges and accelerate development\n' +
-            'Designed and developed RESTful API endpoints for efficient data management using Next.js server components\n' +
-            'Structured a SQLite database system to track user progress, task completion, and competitive metrics\n' +
-            'Onboarded team members to Next.js framework, enhancing collective productivity during the time-constrained hackathon',
-        href: 'https://www.youtube.com/watch?v=_Bulh_exZsA',
-        texture: '/textures/project/project4.mp4',
-        logo: '/assets/project-logo3.png',
+            'Implemented BLoC pattern for predictable state management and clean separation of business logic\n' +
+            'Integrated Firebase ecosystem: Firestore for document storage, Cloud Functions for backend triggers, and Storage for media assets\n' +
+            'Designed adaptive UI components supporting light/dark themes with dynamic theming system\n' +
+            'Deployed progressive web app (PWA) version with service workers for offline functionality' ,
+
+        href: 'https://snapgram-813b3.web.app',
+        texture: '/textures/project/Project5.mp4',
+        logo: '/assets/snapgram-logo.png',
         logoStyle: {
-            backgroundColor: '#0E1F38',
-            border: '0.2px solid #0E2D58',
-            boxShadow: '0px 0px 60px 0px #2F67B64D',
+            backgroundColor: '#02569B',
+            border: '0.2px solid #1F1F1F',
+            boxShadow: '0px 0px 60px 0px #FFCC004D',
         },
-        spotlight: '/assets/spotlight4.png',
+        spotlight: '/assets/spotlight1.png',
         tags: [
             {
                 id: 1,
-                name: 'Next.js',
-                path: '/assets/next.svg',
+                name: 'Flutter',
+                path: '/assets/flutter.png',
+            },
+            {
+                id: 2,
+                name: 'Dart',
+                path: '/assets/dart.svg',
+            },
+            {
+                id: 3,
+                name: 'Firebase',
+                path: '/assets/firebase.svg',
+            },
+            {
+                id: 4,
+                name: 'Google Storage',
+                path: '/assets/googlestorage.svg',
+            },
+        ],
+    },
+    {
+        title: 'FILM Dex: Minimalist Movie Discovery App',
+        desc: 'A streamlined movie app delivering a modern, clutter-free IMDB experience. Built with React Native and TypeScript, FILM Dex focuses on intuitive design and essential features to help users discover and enjoy movies effortlessly.',
+        subdesc:
+            'Cross-Platform Development: Created with Expo Go, ensuring quick testing and deployment across devices.\n' +
+            'Dynamic Movie Exploration: View top trending movies, access the latest releases fetched straight from IMDB, search for any movie, and watch trailers.\n' +
+            'User-Centric Features: Enjoy secure authentication, manage your watchlist, and edit account details seamlessly with Appwrite.\n' +
+            'Clean & Modern UI: Designed to remove unnecessary clutter, letting you focus on what matters most—your movie experience.',
+        href: 'https://drive.google.com/file/d/1V7tQ02M0s_QWY0NCYHnx-A-aD-vRxbZe/view?usp=drive_link',
+        texture: '/textures/project/project6.mp4',
+        logo: '/assets/filmdex-logo.png',
+        logoStyle: {
+            backgroundColor: '#1d1d1d',
+            border: '0.2px solid #ffffff',
+            boxShadow: '0px 0px 60px 0px rgba(255,204,0,0.3)',
+        },
+        spotlight: '/assets/spotlight2.png',
+        tags: [
+            {
+                id: 1,
+                name: 'React Native',
+                path: '/assets/react.svg',
             },
             {
                 id: 2,
@@ -273,20 +290,16 @@ export const myProjects = [
             },
             {
                 id: 3,
-                name: 'Tailwind CSS',
-                path: '/assets/tailwindcss.png',
+                name: 'Expo Go',
+                path: '/assets/expo.png',
             },
             {
                 id: 4,
-                name: 'OpenAI',
-                path: '/assets/openai.svg',
-            },
-            {
-                id: 5,
-                name: 'Hackathon',
-                path: '/assets/third.svg',
+                name: 'Appwrite',
+                path: '/assets/appwrite.png',
             },
         ],
+        qrHref: '/assets/filmdexqr.png',
     },
     {
         title: 'Massimo\'s Bakery: Mobile Group Ordering App (GUXD Capstone)',
@@ -347,25 +360,59 @@ export const calculateSizes = (isSmall, isMobile, isTablet) => {
 
 export const workExperiences = [
     {
-        id: 1,
-        name: 'Advatek Lighting',
-        pos: 'Software Engineer',
-        duration: 'Dec 2023 - Jul 2024',
-        title: "Built a full-stack web application for managing lighting pixel controllers using React/Vue, Python, and MySQL. Designed Amazon EC2/Lightsail microservices with Docker and RESTful APIs, and established CI/CD pipelines that reduced deployment time by 35%.",
-        icon: '/assets/code.png',
+        id: 'microsoft',
+        name: 'Microsoft',
+        pos: 'Software Solution Engineer',
+        duration: 'Feb 2026 - Present',
+        title: "I help enterprise customers in energy, manufacturing, aviation and food & agribusiness adopt GitHub Copilot, GitHub Advanced Security, GitHub Enterprise and Azure DevOps across the software development lifecycle.",
+        highlights: [
+            "Guide hands-on security evaluations on customers' own code, side by side with the tools they already use",
+            'Shape enterprise Copilot rollouts and workshops, from identity and Conditional Access to policy, model and cost governance',
+            'Scope DevSecOps architecture for disconnected, air-gapped operational technology environments',
+            'Core builder of an internal agentic AI app for technical sellers, built on the GitHub Copilot SDK and MCP. I built its Architecture Workbench, which turns a one-line customer brief into a solution spec, an Azure architecture diagram with Well-Architected checks, a live cost estimate and a customer-ready deck',
+            '1st Place Challenge Winner, Microsoft Hackathon 2026',
+        ],
+        icon: '/assets/microsoft.svg',
         animation: 'victory',
     },
     {
-        id: 2,
+        id: 'heartful-leadership',
+        name: 'Heartful Leadership',
+        pos: 'Full Stack Developer',
+        duration: 'May 2025 - Dec 2025',
+        title: "Built a full-stack meditation platform (React, Express.js, PostgreSQL) for a global audience, with Stripe payments and custom audio features. Delivering Phase 1 led straight to a Phase 2 commission on the strength of user feedback.",
+        icon: '/assets/code.png',
+        animation: 'clapping',
+    },
+    {
+        id: 'advatek',
+        name: 'Advatek Lighting',
+        pos: 'Software Engineer',
+        duration: 'Dec 2023 - Jul 2024',
+        title: "Replaced a manual spreadsheet process with an automated manufacturing traceability system (React/Vue, Python, MySQL) that boosted operational efficiency by 30%, cut errors by 45% and removed 8+ hours of manual work a day. Containerised the services with Docker, set up CI/CD that cut deployment time by 35%, and provisioned AWS infrastructure with Terraform.",
+        icon: '/assets/code.png',
+        animation: 'salute',
+    },
+    {
+        id: 'rmit',
+        name: 'RMIT University',
+        pos: 'Master of Information Technology (Distinction)',
+        duration: 'Feb 2023 - Dec 2024',
+        title: "Made the move from 3D into software engineering, graduating with Distinction.",
+        icon: '/assets/education.svg',
+        animation: 'sitting',
+    },
+    {
+        id: 'wilder-world',
         name: 'Wilder World',
         pos: '3D Artist',
         duration: 'Nov 2021 - Nov 2022',
-        title: "Produced over 100 high-quality 3D assets and environments for AAA game development using Blender and Unreal Engine 5. Collaborated with international teams to create immersive environments inspired by Blade Runner and Dune.",
+        title: "Created 100+ 3D environments and props for a AAA metaverse game in Unreal Engine 5 and Blender, working alongside creatives whose credits include DNEG, Nike, Zaha Hadid Architects, Blade Runner and Dune. Optimised performance across platforms with LODs, occlusion culling and asset compression.",
         icon: '/assets/blender.png',
         animation: 'clapping',
     },
     {
-        id: 3,
+        id: 'pf',
         name: 'PF Exterior & Interior',
         pos: '3D Designer and Architectural Visualiser',
         duration: 'Feb 2020 - Nov 2021',
@@ -374,7 +421,7 @@ export const workExperiences = [
         animation: 'salute',
     },
     {
-        id: 4,
+        id: 'bcci',
         name: 'BCCI Design',
         pos: 'Architect Intern',
         duration: 'Nov 2019 - Feb 2020',
@@ -383,7 +430,7 @@ export const workExperiences = [
         animation: 'sitting',
     },
     {
-        id: 5,
+        id: 'futurepolis',
         name: 'Futurepolis',
         pos: 'Urban Planner Intern',
         duration: 'Jul 2018 - Aug 2018',

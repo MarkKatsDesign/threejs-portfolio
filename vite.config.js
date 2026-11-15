@@ -1,3 +1,4 @@
+import process from 'node:process'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
@@ -12,6 +13,10 @@ const isThreeWebGPU = (id) => isThree(id) && /three\.(webgpu|tsl)(\.nodes)?\.js$
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  define: {
+    // Vercel sets VERCEL=1 during its builds; used to load Vercel Analytics only there.
+    'import.meta.env.VITE_VERCEL': JSON.stringify(process.env.VERCEL ?? ''),
+  },
   build: {
     rolldownOptions: {
       output: {

@@ -49,7 +49,7 @@ const Contact = () => {
         } catch (error) {
             setLoading(false)
 
-            console.log(error)
+            console.error(error)
 
             alert('Something went wrong')
         }
@@ -58,11 +58,12 @@ const Contact = () => {
     return (
         <section className="c-space my-20">
             <div className="relative min-h-screen flex items-center justify-center flex-col">
-            <img src="/assets/terminal.png" alt="terminal background" className="absolute inset-0 min-h-screen"/>
+            <img src="/assets/terminal.png" alt="" className="absolute inset-0 min-h-screen"/>
                 <div className="contact-container">
-                    <h3 className="head-text">Let&#39;s talk</h3>
+                    <h3 className="head-text">Get in touch</h3>
                     <p className="text-lg text-white-600 mt-3">
-                        I&#39;m always open to new projects, collaborations, or employment opportunities. Let&#39;s connect!
+                        Always happy to talk about AI in software engineering, developer experience, or building agentic
+                        tools people actually want to use.
                     </p>
                     <form ref={formRef} onSubmit={handleSubmit} className="mt-12 flex flex-col space-y-7">
                         <label className='space-y-3'>
@@ -70,6 +71,7 @@ const Contact = () => {
                             <input
                                 type="text"
                                 name="name"
+                                autoComplete="name"
                                 value={form.name}
                                 onChange={handleChange}
                                 required
@@ -82,6 +84,7 @@ const Contact = () => {
                             <input
                                 type="email"
                                 name="email"
+                                autoComplete="email"
                                 value={form.email}
                                 onChange={handleChange}
                                 required
@@ -98,7 +101,7 @@ const Contact = () => {
                                 required
                                 rows={5}
                                 className="field-input"
-                                placeholder="Hi, I'm interested in ..."
+                                placeholder="Hi Mark, ..."
                             />
                         </label>
                         <button className="field-btn" type="submit" disabled={loading}>

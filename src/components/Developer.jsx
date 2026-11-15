@@ -1,48 +1,27 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { useAnimations, useFBX, useGLTF } from '@react-three/drei';
+import { useLoader } from '@react-three/fiber';
+import { useAnimations, useGLTF } from '@react-three/drei';
+import { AnimationClip, FileLoader } from 'three';
 
 const MODEL_URL = '/models/human/developer.glb';
-const animationUrl = (name) => `/models/animations/${name}.fbx`;
+// Animation-only clips extracted from the Mixamo FBX files in assets-src/ by
+// scripts/fbx-to-clips.mjs. Loading the FBX files directly downloaded ~7.6 MB of
+// unused mesh data and made FBXLoader warn about excess skin weights.
+const ANIMATIONS_URL = '/models/animations/developer-animations.json';
+const loadAsJson = (loader) => loader.setResponseType('json');
 
 // Start downloading everything as soon as this module loads.
 useGLTF.preload(MODEL_URL);
-['idle', 'salute', 'clapping', 'victory', 'sitting', 'laying'].forEach((name) => useFBX.preload(animationUrl(name)));
-
-/**
- * Returns a renamed copy of the FBX's first clip. The Mixamo root tracks
- * ("Armature.*" / "Armature001.*") are dropped: the GLB has no node with that
- * name, so three.js could not bind them and logged a warning for each one.
- */
-const toClip = (fbx, name) => {
-    const clip = fbx.animations[0].clone();
-    clip.name = name;
-    clip.tracks = clip.tracks.filter((track) => !track.name.startsWith('Armature'));
-    return clip;
-};
+useLoader.preload(FileLoader, ANIMATIONS_URL, loadAsJson);
 
 const Developer = ({ animationName = 'idle', ...props }) => {
     const groupRef = useRef(null);
     const { nodes, materials } = useGLTF(MODEL_URL);
-
-    // Hooks must run unconditionally and in the same order on every render.
-    // useFBX caches by URL, so these are cheap after the first load.
-    const idle = useFBX(animationUrl('idle'));
-    const salute = useFBX(animationUrl('salute'));
-    const clapping = useFBX(animationUrl('clapping'));
-    const victory = useFBX(animationUrl('victory'));
-    const sitting = useFBX(animationUrl('sitting'));
-    const laying = useFBX(animationUrl('laying'));
+    const clipData = useLoader(FileLoader, ANIMATIONS_URL, loadAsJson);
 
     const animations = useMemo(
-        () => [
-            toClip(idle, 'idle'),
-            toClip(salute, 'salute'),
-            toClip(clapping, 'clapping'),
-            toClip(victory, 'victory'),
-            toClip(sitting, 'sitting'),
-            toClip(laying, 'laying'),
-        ],
-        [idle, salute, clapping, victory, sitting, laying],
+        () => Object.values(clipData).map((clip) => AnimationClip.parse(clip)),
+        [clipData],
     );
 
     const { actions } = useAnimations(animations, groupRef);

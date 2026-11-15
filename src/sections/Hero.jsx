@@ -18,14 +18,19 @@ const Hero = () => {
     return (
         <section className="min-h-screen w-full flex flex-col relative">
             <div className="hero-overlay" />
-            <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3">
+            <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3 relative z-10 pointer-events-none">
                 <p className="sm:text-3xl text-2xl font-medium text-white text-center font-generalsans">
-                    Hi, I am Mark <span className="waving-hand">👋</span>
+                    Hi, I&#39;m Mark <span className="waving-hand">👋</span>
                 </p>
-                <p className="hero_tag text-gray_gradient">Creating Seamless Digital Experiences</p>
+                <h1 className="hero_tag text-gray_gradient">Helping engineers ship faster with AI</h1>
+                <p className="text-center text-white-600 sm:text-lg text-base max-w-3xl mx-auto text-balance">
+                    Software Solution Engineer at Microsoft · GitHub Copilot, code security &amp; agentic AI
+                </p>
             </div>
 
-            <div className="w-full h-full absolute inset-0">
+            {/* Full viewport width (not just the 1280px content column) so the
+                attractor isn't cut off at the column edge on wide screens. */}
+            <div className="h-full absolute inset-y-0 left-1/2 w-screen -translate-x-1/2">
                 {isLoading && <CanvasLoader />}
                 <Canvas
                     className="w-full h-full"
@@ -69,7 +74,7 @@ const Hero = () => {
 
             <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
                 <a href="#about" className="w-fit">
-                    <Button name="Let's work together" isBeam containerClass="sm:w-fit w-full sm:min-w-96" />
+                    <Button name="Explore my work" containerClass="sm:w-fit w-full sm:min-w-96" />
                 </a>
             </div>
         </section>

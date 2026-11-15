@@ -92,15 +92,27 @@ src/
 │   ├── 🌌 LorenzAttractor   # Mathematical particle system
 │   ├── 💻 Laptop            # 3D model with video textures
 │   ├── 👤 Developer         # Animated character model
-│   └── 📷 HeroCamera        # Dynamic camera controller
+│   └── 🏅 AwardMedal        # 3D hackathon medal (extruded from the badge outline)
 ├── 📁 sections/             # Page sections
 │   ├── 🏠 Hero              # Landing with 3D background
-│   ├── 🌍 About             # Interactive globe
+│   ├── 🌍 About             # Intro, focus areas and interactive globe
+│   ├── 🏆 Recognition       # 3D award medal and achievements
+│   ├── 📈 CareerEvolution   # Experience timeline
 │   ├── 💼 Projects          # 3D project showcase
-│   ├── 📈 CareerEvolution   # Professional timeline
 │   └── 📧 Contact           # Contact form with EmailJS
 └── 📁 constants/            # Data and configuration
+scripts/                     # Asset pipeline (see "Assets" below)
+assets-src/                  # Source assets that are not served (Mixamo FBX)
 ```
+
+### Assets
+
+- **Character animations** — the Mixamo FBX files in `assets-src/animations/` are converted to a
+  single animation-only JSON (`public/models/animations/developer-animations.json`) with
+  `node scripts/fbx-to-clips.mjs .`. Re-run it after adding or changing an FBX.
+- **Award medal** — `python scripts/prep-award-images.py <award.jpg> <portrait.jpg> <outDir>`
+  (needs Pillow + numpy) cuts the badge out of its background and measures its outline for
+  `src/components/awardOutline.js`.
 
 ## 🎨 Key Technologies
 
@@ -143,10 +155,14 @@ src/
 - QR codes for mobile apps
 - Technology stack visualization
 
-### **Career Evolution - Timeline**
+### **Recognition - 3D Medal**
+- Microsoft Hackathon 2026 badge as a bevelled gold medal
+- Outline extruded from the badge artwork itself
+- Studio lighting built from Lightformers (no HDR download)
+
+### **Experience - Timeline**
 - Interactive professional timeline
-- Context-specific character animations
-- Smooth GSAP transitions
+- Context-specific character animations (sticky avatar)
 - Responsive design adaptation
 
 ## 📊 Performance
