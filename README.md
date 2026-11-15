@@ -53,24 +53,12 @@
    npm install
    ```
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   ```
-   
-   Then edit `.env` with your EmailJS credentials:
-   ```env
-   VITE_EMAILJS_SERVICE_ID=your_service_id
-   VITE_EMAILJS_TEMPLATE_ID=your_template_id  
-   VITE_EMAILJS_PUBLIC_KEY=your_public_key
-   ```
-
-4. **Start development server**
+3. **Start development server**
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**
+4. **Open your browser**
    ```
    http://localhost:5173
    ```
@@ -100,7 +88,7 @@ src/
 │   ├── 🏆 Recognition       # 3D award medal and achievements
 │   ├── 📈 CareerEvolution   # Experience timeline
 │   ├── 💼 Projects          # 3D project showcase
-│   └── 📧 Contact           # Contact form with EmailJS
+│   └── 📧 Contact           # Email, LinkedIn and GitHub links (no form, no third-party service)
 └── 📁 constants/            # Data and configuration
 scripts/                     # Asset pipeline (see "Assets" below)
 assets-src/                  # Source assets that are not served (Mixamo FBX)
@@ -132,8 +120,7 @@ assets-src/                  # Source assets that are not served (Mixamo FBX)
 - **GSAP 3.15** - Professional animation library
 - **Framer Motion** (planned) - React animation library
 
-### **Communication**
-- **EmailJS** - Client-side email service
+### **Utilities**
 - **React Responsive** - Responsive design utilities
 
 ## 🎯 Featured Sections
@@ -174,12 +161,6 @@ assets-src/                  # Source assets that are not served (Mixamo FBX)
 - 🖥️ **Desktop Experience**: Full-featured 3D
 
 ## 🔧 Configuration
-
-### **EmailJS Setup**
-1. Create account at [emailjs.com](https://emailjs.com)
-2. Create email service and template
-3. Add credentials to `.env` file
-4. Update template variables as needed
 
 ### **Deployment**
 Optimized for deployment on:

@@ -1,80 +1,53 @@
 import { useEffect, useRef, useState } from "react";
-import emailjs from '@emailjs/browser';
 
-const LIMITS = { name: 100, email: 254, message: 4000 };
-// Basic abuse protection. EmailJS keys are public by design, so the real
-// limits (allowed origins, rate limit, fixed recipient) belong in the EmailJS
-// dashboard; these checks just stop casual bots and accidental resubmits.
-const MIN_FILL_TIME_MS = 3000;
-const COOLDOWN_MS = 60_000;
-const LAST_SENT_KEY = 'contact:lastSentAt';
+const EMAIL = 'mark.kats.career@gmail.com';
+const MAILTO = `mailto:${EMAIL}?subject=${encodeURIComponent('Hello from your portfolio')}`;
 
-const EMPTY_FORM = { name: '', email: '', message: '' };
+const MailIcon = () => (
+    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="2" />
+        <path d="M3 7l9 6 9-6" />
+    </svg>
+);
 
-const STATUS_TEXT = {
-    sent: 'Thanks, your message has been sent. I will get back to you soon.',
-    error: 'Something went wrong. Please try again, or email me directly.',
-    cooldown: 'Your message was sent a moment ago. Please wait a minute before sending another.',
-};
+const CopyIcon = ({ copied }) => (
+    <svg viewBox="0 0 24 24" className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        {copied ? (
+            <path d="M5 12.5l4.5 4.5L19 7.5" />
+        ) : (
+            <>
+                <rect x="9" y="9" width="11" height="11" rx="2" />
+                <path d="M5 15V6a2 2 0 0 1 2-2h9" />
+            </>
+        )}
+    </svg>
+);
 
+const LINKS = [
+    { href: 'https://www.linkedin.com/in/mark-kats/', label: 'LinkedIn', icon: '/assets/linkedln.png' },
+    { href: 'https://github.com/MarkKatsDesign', label: 'GitHub', icon: '/assets/github.svg' },
+];
+
+/**
+ * Contact links in a macOS-style window. There is deliberately no form: no
+ * third-party email service, keys or spam handling to maintain.
+ */
 const Contact = () => {
-    const [form, setForm] = useState(EMPTY_FORM);
-    const [honeypot, setHoneypot] = useState('');
-    const [status, setStatus] = useState('idle'); // idle | sending | sent | error | cooldown
-    const openedAtRef = useRef(0);
+    const [hasCopied, setHasCopied] = useState(false);
+    const copyTimeoutRef = useRef(null);
 
-    useEffect(() => {
-        openedAtRef.current = Date.now();
-    }, []);
+    useEffect(() => () => clearTimeout(copyTimeoutRef.current), []);
 
-    const handleChange = ({ target: { name, value } }) => {
-        setForm((prev) => ({ ...prev, [name]: value }));
-        if (status !== 'sending') setStatus('idle');
+    const handleCopy = () => {
+        navigator.clipboard
+            .writeText(EMAIL)
+            .then(() => {
+                setHasCopied(true);
+                clearTimeout(copyTimeoutRef.current);
+                copyTimeoutRef.current = setTimeout(() => setHasCopied(false), 2000);
+            })
+            .catch((error) => console.error('Could not copy email address:', error));
     };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        // Bots tend to fill every field and submit instantly; pretend it worked.
-        if (honeypot || Date.now() - openedAtRef.current < MIN_FILL_TIME_MS) {
-            setStatus('sent');
-            setForm(EMPTY_FORM);
-            return;
-        }
-
-        const lastSentAt = Number(localStorage.getItem(LAST_SENT_KEY) || 0);
-        if (Date.now() - lastSentAt < COOLDOWN_MS) {
-            setStatus('cooldown');
-            return;
-        }
-
-        setStatus('sending');
-        try {
-            await emailjs.send(
-                import.meta.env.VITE_EMAILJS_SERVICE_ID,
-                import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-                {
-                    from_name: form.name.trim(),
-                    to_name: 'Mark',
-                    from_email: form.email.trim(),
-                    // The template's Reply To field is {{reply_to}}, so replying in
-                    // Gmail goes straight to the visitor. The recipient is fixed in
-                    // the EmailJS template, not sent from the browser.
-                    reply_to: form.email.trim(),
-                    message: form.message.trim(),
-                },
-                import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
-            );
-            localStorage.setItem(LAST_SENT_KEY, String(Date.now()));
-            setStatus('sent');
-            setForm(EMPTY_FORM);
-        } catch (error) {
-            console.error('Could not send message:', error);
-            setStatus('error');
-        }
-    };
-
-    const isSending = status === 'sending';
 
     return (
         <section className="c-space my-20">
@@ -86,95 +59,53 @@ const Contact = () => {
                         <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
                         <span className="h-3 w-3 rounded-full bg-[#28c840]" />
                     </div>
-                    <p className="absolute left-1/2 -translate-x-1/2 text-sm font-medium text-white-500">New Message</p>
+                    <p className="absolute left-1/2 -translate-x-1/2 text-sm font-medium text-white-500">Contact</p>
                 </div>
 
-                <div className="sm:p-10 p-5">
+                <div className="sm:p-10 p-6">
                     <h3 className="head-text">Get in touch</h3>
                     <p className="text-lg text-white-600 mt-3">
                         Always happy to talk about AI in software engineering, developer experience, or building agentic
                         tools people actually want to use.
                     </p>
 
-                    <form onSubmit={handleSubmit} className="relative mt-10 flex flex-col space-y-7">
-                        <p className="flex items-center gap-3 border-b border-black-300 pb-3 text-white-500">
-                            <span className="text-sm">To:</span>
-                            <span className="rounded-full bg-black-300 px-3 py-1 text-sm text-white-700">Mark Kats</span>
-                        </p>
+                    <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-3 rounded-lg border border-black-300 bg-black-100 p-3">
+                        <a
+                            href={MAILTO}
+                            className="flex flex-1 items-center gap-3 rounded-md px-3 py-2 text-white-800 hover:bg-black-300 transition-colors min-w-0"
+                        >
+                            <span className="text-white-500"><MailIcon /></span>
+                            <span className="text-base sm:text-lg font-medium whitespace-nowrap">{EMAIL}</span>
+                        </a>
+                        <button
+                            type="button"
+                            onClick={handleCopy}
+                            className="flex items-center justify-center gap-2 rounded-md border border-black-500 px-4 py-2 text-sm text-white-600 hover:text-white hover:border-white-500 transition-colors"
+                            aria-live="polite"
+                        >
+                            <CopyIcon copied={hasCopied} />
+                            {hasCopied ? 'Copied' : 'Copy'}
+                        </button>
+                    </div>
 
-                        {/* Honeypot: hidden from people and assistive tech; bots fill it in. */}
-                        <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true">
-                            <label>
-                                Company
-                                <input
-                                    type="text"
-                                    name="company"
-                                    tabIndex={-1}
-                                    autoComplete="off"
-                                    value={honeypot}
-                                    onChange={(e) => setHoneypot(e.target.value)}
-                                />
-                            </label>
-                        </div>
-
-                        <div className="grid sm:grid-cols-2 gap-7">
-                            <label className="space-y-3">
-                                <span className="field-label">Full name</span>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    autoComplete="name"
-                                    value={form.name}
-                                    onChange={handleChange}
-                                    required
-                                    maxLength={LIMITS.name}
-                                    className="field-input"
-                                    placeholder="Jane Smith"
-                                />
-                            </label>
-                            <label className="space-y-3">
-                                <span className="field-label">Email</span>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    autoComplete="email"
-                                    value={form.email}
-                                    onChange={handleChange}
-                                    required
-                                    maxLength={LIMITS.email}
-                                    className="field-input"
-                                    placeholder="jane@company.com"
-                                />
-                            </label>
-                        </div>
-                        <label className="space-y-3">
-                            <span className="field-label">Message</span>
-                            <textarea
-                                name="message"
-                                value={form.message}
-                                onChange={handleChange}
-                                required
-                                minLength={10}
-                                maxLength={LIMITS.message}
-                                rows={5}
-                                className="field-input"
-                                placeholder="Hi Mark, ..."
-                            />
-                        </label>
-
-                        <div className="flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-4">
-                            <p
-                                role="status"
-                                className={`text-sm min-h-5 ${status === 'error' || status === 'cooldown' ? 'text-[#ff8a80]' : 'text-[#3fb950]'}`}
+                    <div className="mt-6 grid sm:grid-cols-3 gap-3">
+                        <a href={MAILTO} className="field-btn">
+                            <MailIcon />
+                            Email me
+                        </a>
+                        {LINKS.map(({ href, label, icon }) => (
+                            <a
+                                key={label}
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="field-btn bg-black-300 hover:bg-black-500 transition-colors"
                             >
-                                {STATUS_TEXT[status] ?? ''}
-                            </p>
-                            <button className="field-btn sm:min-w-48 disabled:opacity-60" type="submit" disabled={isSending}>
-                                {isSending ? 'Sending…' : 'Send message'}
-                                <img src="/assets/arrow-up.png" alt="" className="field-btn_arrow" />
-                            </button>
-                        </div>
-                    </form>
+                                <img src={icon} alt="" className="w-5 h-5" />
+                                {label}
+                            </a>
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>
