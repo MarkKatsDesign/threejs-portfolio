@@ -1,53 +1,49 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGLTF, useVideoTexture } from '@react-three/drei';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import * as THREE from 'three';
 
+const isIOS = typeof navigator !== 'undefined' && /iPad|iPhone|iPod/.test(navigator.userAgent);
+
+const videoPosition = [0, 10.5, -10.6];
+
+// Portrait recordings (project3 and Project5) need a tall plane; everything else is landscape.
+const defaultDimensions = (src) =>
+    src.includes('project3.mp4') || src.includes('Project5.mp4')
+        ? { width: 10, height: 20 }
+        : { width: 30, height: 19 };
+
+const videoTextureConfig = {
+    unsuspend: isIOS ? 'click' : 'canplay',
+    crossOrigin: 'Anonymous',
+    muted: true,
+    playsInline: true
+};
+
 export function Laptop(props) {
-    const group = useRef(null);
-    const videoPlane = useRef(null);
+    const groupRef = useRef(null);
     const { nodes, materials } = useGLTF('/models/laptop.glb');
 
     const [isVideoReady, setIsVideoReady] = useState(false);
-    const [isIOS, setIsIOS] = useState(false);
-
-    useEffect(() => {
-        const userAgent = navigator.userAgent;
-        setIsIOS(/iPad|iPhone|iPod/.test(userAgent));
-    }, []);
-
-    const [videoDimensions, setVideoDimensions] = useState({ width: 30, height: 19 });
-    const videoPosition = { x: 0, y: 10.5, z: -10.6 };
     const textureSrc = props.texture || '/textures/project/project1.mp4';
 
-    useEffect(() => {
-        if (textureSrc.includes('project3.mp4') || textureSrc.includes('Project5.mp4')) {
-            setVideoDimensions({ width: 10, height: 20 }); // Set specific dimensions for project4.mp4 and Project5.mp4
-        } else {
-            setVideoDimensions({ width: 30, height: 19 }); // Default dimensions
-        }
-    }, [textureSrc]);
-
-    const videoTextureConfig = {
-        unsuspend: isIOS ? 'click' : 'canplay',
-        crossOrigin: 'Anonymous',
-        muted: true,
-        playsInline: true
-    };
+    // Size reported by the video's metadata, remembered per source so that
+    // switching projects falls back to the default for the new video.
+    const [metadataDimensions, setMetadataDimensions] = useState(null);
+    const videoDimensions =
+        metadataDimensions?.src === textureSrc ? metadataDimensions : defaultDimensions(textureSrc);
 
     const videoTexture = useVideoTexture(textureSrc, videoTextureConfig);
 
     useEffect(() => {
-        if (!videoTexture) return;
-
-        videoTexture.flipY = true;
-        const video = videoTexture.source.data;
+        const video = videoTexture?.source.data;
         if (!video) return;
 
         const handleLoadedMetadata = () => {
             const scaleFactor = 0.01;
-            setVideoDimensions({
+            setMetadataDimensions({
+                src: textureSrc,
                 width: video.videoWidth * scaleFactor,
                 height: video.videoHeight * scaleFactor
             });
@@ -75,15 +71,15 @@ export function Laptop(props) {
             video.removeEventListener('loadedmetadata', handleLoadedMetadata);
             video.removeEventListener('canplay', handleCanPlay);
             video.removeEventListener('error', handleError);
-            if (isIOS && touchHandler) {
+            if (touchHandler) {
                 document.removeEventListener('touchstart', touchHandler);
             }
         };
-    }, [videoTexture, isIOS]);
+    }, [videoTexture, textureSrc]);
 
     useGSAP(() => {
-        if (group.current) {
-            gsap.from(group.current.rotation, {
+        if (groupRef.current) {
+            gsap.from(groupRef.current.rotation, {
                 y: Math.PI / 2,
                 duration: 1,
                 ease: 'power3.inOut'
@@ -92,7 +88,7 @@ export function Laptop(props) {
     }, [isVideoReady]);
 
     return (
-        <group ref={group} {...props} dispose={null}>
+        <group ref={groupRef} {...props} dispose={null}>
             <mesh
                 castShadow
                 receiveShadow
@@ -115,11 +111,7 @@ export function Laptop(props) {
             </mesh>
 
             {(isVideoReady || !isIOS) && (
-                <mesh
-                    ref={videoPlane}
-                    position={[videoPosition.x, videoPosition.y, videoPosition.z]}
-                    rotation={[0, 0, 0]}
-                >
+                <mesh position={videoPosition}>
                     <planeGeometry args={[videoDimensions.width, videoDimensions.height]} />
                     <meshBasicMaterial
                         map={videoTexture}

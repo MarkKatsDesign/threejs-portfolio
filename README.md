@@ -1,17 +1,17 @@
 # 🌌 Three.js Portfolio
 
-> A cutting-edge portfolio website showcasing the intersection of mathematics, 3D graphics, and modern web development.
+> Interactive 3D portfolio of Mark Kats, Software Solution Engineer at Microsoft: real-time WebGL, built with React and Three.js.
 
 [![Live Demo](https://img.shields.io/badge/🚀-Live%20Demo-blue?style=for-the-badge)](https://markkats.com)
-[![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
-[![Three.js](https://img.shields.io/badge/Three.js-0.173.0-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.1.0-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-19.3-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-0.187-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 ## ✨ Features
 
 ### 🎯 **Interactive 3D Visualizations**
-- **Lorenz Attractor**: Real-time mathematical chaos simulation with 10,000 particles
+- **Black hole**: Real-time ray-traced black hole with gravitational lensing and an accretion disk (GLSL)
 - **3D Globe**: Interactive world map with animated flight paths
 - **Project Showcase**: 3D laptop models with video textures
 
@@ -30,14 +30,14 @@
 ## 🎥 Preview
 
 <div align="center">
-  <img src="public/assets/lorenz.png" alt="Hero Section" width="800"/>
-  <p><em>Lorenz Attractor visualization with Gargantua-inspired color mapping</em></p>
+  <img src="docs/hero.jpeg" alt="Hero section" width="800"/>
+  <p><em>Ray-traced black hole: the far side of the disk is lensed over and under the shadow</em></p>
 </div>
 
 ## 🚀 Quick Start
 
 ### Prerequisites
-- **Node.js** 18+ 
+- **Node.js** 20.19+ (required by Vite 8)
 - **npm** or **yarn**
 
 ### Installation
@@ -53,24 +53,12 @@
    npm install
    ```
 
-3. **Set up environment variables**
-   ```bash
-   cp .env.example .env
-   ```
-   
-   Then edit `.env` with your EmailJS credentials:
-   ```env
-   VITE_EMAILJS_SERVICE_ID=your_service_id
-   VITE_EMAILJS_TEMPLATE_ID=your_template_id  
-   VITE_EMAILJS_PUBLIC_KEY=your_public_key
-   ```
-
-4. **Start development server**
+3. **Start development server**
    ```bash
    npm run dev
    ```
 
-5. **Open your browser**
+4. **Open your browser**
    ```
    http://localhost:5173
    ```
@@ -89,47 +77,59 @@
 ```
 src/
 ├── 📁 components/           # Reusable UI components
-│   ├── 🌌 LorenzAttractor   # Mathematical particle system
+│   ├── 🕳️ BlackHole         # Ray-traced black hole shader (hero)
+│   ├── ✏️ AboutVisuals      # Animated line drawings for the About cards
 │   ├── 💻 Laptop            # 3D model with video textures
 │   ├── 👤 Developer         # Animated character model
-│   └── 📷 HeroCamera        # Dynamic camera controller
+│   └── 🏅 AwardMedal        # 3D hackathon medal (extruded from the badge outline)
 ├── 📁 sections/             # Page sections
 │   ├── 🏠 Hero              # Landing with 3D background
-│   ├── 🌍 About             # Interactive globe
+│   ├── 🌍 About             # Intro, focus areas and interactive globe
+│   ├── 🏆 Recognition       # 3D award medal and achievements
+│   ├── 📈 CareerEvolution   # Experience timeline
 │   ├── 💼 Projects          # 3D project showcase
-│   ├── 📈 CareerEvolution   # Professional timeline
-│   └── 📧 Contact           # Contact form with EmailJS
+│   └── 📧 Contact           # Email, LinkedIn and GitHub links (no form, no third-party service)
 └── 📁 constants/            # Data and configuration
+scripts/                     # Asset pipeline (see "Assets" below)
+assets-src/                  # Source assets that are not served (Mixamo FBX)
 ```
+
+### Assets
+
+- **Character animations** — the Mixamo FBX files in `assets-src/animations/` are converted to a
+  single animation-only JSON (`public/models/animations/developer-animations.json`) with
+  `node scripts/fbx-to-clips.mjs .`. Re-run it after adding or changing an FBX.
+- **Award medal** — `python scripts/prep-award-images.py <award.jpg> <portrait.jpg> <outDir>`
+  (needs Pillow + numpy) cuts the badge out of its background and measures its outline for
+  `src/components/awardOutline.js`.
 
 ## 🎨 Key Technologies
 
 ### **Frontend**
-- **React 19.0.0** - Latest React with concurrent features
-- **Vite 6.1.0** - Next-generation frontend tooling
-- **Tailwind CSS** - Utility-first CSS framework
+- **React 19.3** - Latest React with concurrent features
+- **Vite 8** - Next-generation frontend tooling (Rolldown bundler)
+- **Tailwind CSS 4** - Utility-first CSS framework
 
 ### **3D Graphics**  
-- **Three.js 0.173.0** - Core 3D graphics library
+- **Three.js 0.187** - Core 3D graphics library
 - **@react-three/fiber** - React renderer for Three.js
 - **@react-three/drei** - Useful helpers and abstractions
 - **react-globe.gl** - Interactive 3D globe
 
 ### **Animation**
-- **GSAP 3.12.7** - Professional animation library
+- **GSAP 3.15** - Professional animation library
 - **Framer Motion** (planned) - React animation library
 
-### **Communication**
-- **EmailJS** - Client-side email service
+### **Utilities**
 - **React Responsive** - Responsive design utilities
 
 ## 🎯 Featured Sections
 
-### **Hero - Lorenz Attractor**
-- Mathematical chaos visualization 
-- 10,000-particle real-time simulation
-- Gargantua-inspired color mapping
-- Auto-rotating camera system
+### **Hero - Black Hole**
+- Per-pixel ray tracing of light paths around a Schwarzschild black hole
+- Lensed accretion disk with Keplerian rotation and relativistic beaming
+- Camera leans gently towards the mouse; no drag, so touch scrolling is never captured
+- Renders at reduced resolution, pauses off-screen and stays still with reduced motion
 
 ### **About - Interactive Globe**  
 - Real geographical coordinates
@@ -143,10 +143,14 @@ src/
 - QR codes for mobile apps
 - Technology stack visualization
 
-### **Career Evolution - Timeline**
+### **Recognition - 3D Medal**
+- Microsoft Hackathon 2026 badge as a bevelled gold medal
+- Outline extruded from the badge artwork itself
+- Studio lighting built from Lightformers (no HDR download)
+
+### **Experience - Timeline**
 - Interactive professional timeline
-- Context-specific character animations
-- Smooth GSAP transitions
+- Context-specific character animations (sticky avatar)
 - Responsive design adaptation
 
 ## 📊 Performance
@@ -157,12 +161,6 @@ src/
 - 🖥️ **Desktop Experience**: Full-featured 3D
 
 ## 🔧 Configuration
-
-### **EmailJS Setup**
-1. Create account at [emailjs.com](https://emailjs.com)
-2. Create email service and template
-3. Add credentials to `.env` file
-4. Update template variables as needed
 
 ### **Deployment**
 Optimized for deployment on:

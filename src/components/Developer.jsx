@@ -1,101 +1,46 @@
-import React, { useEffect, useRef } from 'react';
-import { useAnimations, useFBX, useGLTF } from '@react-three/drei';
+import { useEffect, useMemo, useRef } from 'react';
+import { useLoader } from '@react-three/fiber';
+import { useAnimations, useGLTF } from '@react-three/drei';
+import { AnimationClip, FileLoader } from 'three';
 
-// Pre-load all animations outside the component
-const preloadedModels = {
-    model: null,
-    idle: null,
-    salute: null,
-    clapping: null,
-    victory: null,
-    sitting: null,
-    laying: null
-};
+const MODEL_URL = '/models/human/developer.glb';
+// Animation-only clips extracted from the Mixamo FBX files in assets-src/ by
+// scripts/fbx-to-clips.mjs. Loading the FBX files directly downloaded ~7.6 MB of
+// unused mesh data and made FBXLoader warn about excess skin weights.
+const ANIMATIONS_URL = '/models/animations/developer-animations.json';
+const loadAsJson = (loader) => loader.setResponseType('json');
 
-// This function should be called once at app initialization
-export const preloadDeveloperAssets = async () => {
-    // This would be the ideal approach, but since we're fixing existing code,
-    // we'll rely on the useGLTF.preload below
-};
-
-// Preload the model
-useGLTF.preload('/models/human/developer.glb');
+// Start downloading everything as soon as this module loads.
+useGLTF.preload(MODEL_URL);
+useLoader.preload(FileLoader, ANIMATIONS_URL, loadAsJson);
 
 const Developer = ({ animationName = 'idle', ...props }) => {
-    const group = useRef();
+    const groupRef = useRef(null);
+    const { nodes, materials } = useGLTF(MODEL_URL);
+    const clipData = useLoader(FileLoader, ANIMATIONS_URL, loadAsJson);
 
-    // Load the model
-    const { nodes, materials } = useGLTF('/models/human/developer.glb');
+    const animations = useMemo(
+        () => Object.values(clipData).map((clip) => AnimationClip.parse(clip)),
+        [clipData],
+    );
 
-    // Load animations one by one with individual refs to prevent re-renders
-    const idleAnimationRef = useRef();
-    const saluteAnimationRef = useRef();
-    const clappingAnimationRef = useRef();
-    const victoryAnimationRef = useRef();
-    const sittingAnimationRef = useRef();
-    const layingAnimationRef = useRef();
-
-    // Load animations and store in refs
-    if (!idleAnimationRef.current) {
-        idleAnimationRef.current = useFBX('/models/animations/idle.fbx').animations[0];
-        idleAnimationRef.current.name = 'idle';
-    }
-
-    if (!saluteAnimationRef.current) {
-        saluteAnimationRef.current = useFBX('/models/animations/salute.fbx').animations[0];
-        saluteAnimationRef.current.name = 'salute';
-    }
-
-    if (!clappingAnimationRef.current) {
-        clappingAnimationRef.current = useFBX('/models/animations/clapping.fbx').animations[0];
-        clappingAnimationRef.current.name = 'clapping';
-    }
-
-    if (!victoryAnimationRef.current) {
-        victoryAnimationRef.current = useFBX('/models/animations/victory.fbx').animations[0];
-        victoryAnimationRef.current.name = 'victory';
-    }
-
-    if (!sittingAnimationRef.current) {
-        sittingAnimationRef.current = useFBX('/models/animations/sitting.fbx').animations[0];
-        sittingAnimationRef.current.name = 'sitting';
-    }
-
-    if (!layingAnimationRef.current) {
-        layingAnimationRef.current = useFBX('/models/animations/laying.fbx').animations[0];
-        layingAnimationRef.current.name = 'laying';
-    }
-
-    // Combine all animations for the useAnimations hook
-    const animations = [
-        idleAnimationRef.current,
-        saluteAnimationRef.current,
-        clappingAnimationRef.current,
-        victoryAnimationRef.current,
-        sittingAnimationRef.current,
-        layingAnimationRef.current
-    ].filter(Boolean); // Filter out any undefined animations
-
-    // Set up animations only when all are loaded
-    const { actions } = useAnimations(animations, group);
+    const { actions } = useAnimations(animations, groupRef);
 
     useEffect(() => {
-        // Only play animation if it exists in actions
-        if (actions && actions[animationName]) {
-            actions[animationName].reset().fadeIn(0.5).play();
-
-            return () => {
-                if (actions[animationName]) {
-                    actions[animationName].fadeOut(0.5);
-                }
-            };
-        } else if (animations.length > 0) {
-            console.warn(`Animation "${animationName}" not found in actions:`, actions);
+        const action = actions[animationName];
+        if (!action) {
+            console.warn(`Animation "${animationName}" not found`);
+            return;
         }
-    }, [animationName, actions, animations.length]);
+
+        action.reset().fadeIn(0.5).play();
+        return () => {
+            action.fadeOut(0.5);
+        };
+    }, [animationName, actions]);
 
     return (
-        <group {...props} dispose={null} ref={group}>
+        <group {...props} dispose={null} ref={groupRef}>
             <primitive object={nodes.Hips} />
             <skinnedMesh
                 name="EyeLeft"
