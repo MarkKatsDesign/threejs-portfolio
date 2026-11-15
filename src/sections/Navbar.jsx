@@ -1,6 +1,25 @@
 import { useState } from 'react';
 import { navLinks } from "../constants/index.js";
 
+const NavItems = ({ activeNav, onNavClick }) => (
+    <ul className="nav-ul">
+        {navLinks.map(({ id, href, name }) => (
+            <li key={id} className="nav-li">
+                <a
+                    href={href}
+                    className={`nav-li_a ${activeNav === id ? 'text-white' : 'text-neutral-400'}`}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        onNavClick(id);
+                    }}
+                >
+                    {name}
+                </a>
+            </li>
+        ))}
+    </ul>
+);
+
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeNav, setActiveNav] = useState('home');
@@ -16,27 +35,6 @@ const Navbar = () => {
         if (element) {
             element.scrollIntoView({ behavior: 'smooth' });
         }
-    };
-
-    const NavItems = () => {
-        return (
-            <ul className="nav-ul">
-                {navLinks.map(({ id, href, name }) => (
-                    <li key={id} className="nav-li">
-                        <a
-                            href={href}
-                            className={`nav-li_a ${activeNav === id ? 'text-white' : 'text-neutral-400'}`}
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleNavClick(id);
-                            }}
-                        >
-                            {name}
-                        </a>
-                    </li>
-                ))}
-            </ul>
-        );
     };
 
     return (
@@ -62,13 +60,13 @@ const Navbar = () => {
                         <img src={isMenuOpen ? "/assets/close.svg" : "/assets/menu.svg"} alt="toggle" className="w-6 h-6"/>
                     </button>
                     <nav className="sm:flex hidden">
-                        <NavItems />
+                        <NavItems activeNav={activeNav} onNavClick={handleNavClick} />
                     </nav>
                 </div>
             </div>
             <div className={`nav-sidebar ${isMenuOpen ? 'max-h-screen' : 'max-h-0'} transition-all duration-300 ease-in-out overflow-hidden`}>
                 <nav className="p-5">
-                    <NavItems />
+                    <NavItems activeNav={activeNav} onNavClick={handleNavClick} />
                 </nav>
             </div>
         </header>

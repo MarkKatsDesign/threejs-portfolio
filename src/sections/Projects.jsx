@@ -40,16 +40,16 @@ const Projects = () => {
                         <p className="text-white text-2xl font-semibold animatedText">{currentProject.title}</p>
                         <p className="animatedText">{currentProject.desc}</p>
                         <ul className="list-disc pl-5">
-                            {currentProject.subdesc.split('\n').map((line, index) => (
-                                <li key={index} className="animatedText">{line}</li>
+                            {currentProject.subdesc.split('\n').map((line) => (
+                                <li key={line} className="animatedText">{line}</li>
                             ))}
                         </ul>
                     </div>
 
                     <div className="flex items-center justify-between flex-wrap gap-5">
                         <div className="flex items-center gap-3">
-                            {currentProject.tags.map((tag, index) => (
-                                <div key={index} className="tech-logo">
+                            {currentProject.tags.map((tag) => (
+                                <div key={tag.id} className="tech-logo">
                                     <img src={tag.path} alt={tag.name} />
                                 </div>
                             ))}

@@ -6,13 +6,11 @@ import { useMediaQuery } from "react-responsive";
 import { calculateSizes } from "../constants/index.js";
 import Button from "../components/Button.jsx";
 import LorenzAttractor from "../components/LorenzAttractor.jsx";
-// import { DebugInfo } from "../components/LorenzAttractor";
 
 const Hero = () => {
     const isSmall = useMediaQuery({ maxWidth: 440 });
     const isMobile = useMediaQuery({ maxWidth: 768 });
     const isTablet = useMediaQuery({ minWidth: 769, maxWidth: 1024 });
-    // const [debugInfo, setDebugInfo] = useState({});
     const [isLoading, setIsLoading] = useState(false);
 
     const sizes = calculateSizes(isSmall, isMobile, isTablet);
@@ -44,10 +42,8 @@ const Hero = () => {
                 >
                     <Suspense fallback={<LoadingSignal onChange={setIsLoading} />}>
                         <LorenzAttractor
-                            // onDebugUpdate={setDebugInfo}
                             position={sizes.lorenzPosition}
                             scale={sizes.lorenzScale}
-                            color="#3282F6"
                             pointSize={sizes.pointSize}
                         />
 
@@ -76,7 +72,6 @@ const Hero = () => {
                     <Button name="Let's work together" isBeam containerClass="sm:w-fit w-full sm:min-w-96" />
                 </a>
             </div>
-            {/*<DebugInfo debugInfo={debugInfo} />*/}
         </section>
     );
 };

@@ -1,101 +1,67 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useAnimations, useFBX, useGLTF } from '@react-three/drei';
 
-// Pre-load all animations outside the component
-const preloadedModels = {
-    model: null,
-    idle: null,
-    salute: null,
-    clapping: null,
-    victory: null,
-    sitting: null,
-    laying: null
-};
+const MODEL_URL = '/models/human/developer.glb';
+const animationUrl = (name) => `/models/animations/${name}.fbx`;
 
-// This function should be called once at app initialization
-export const preloadDeveloperAssets = async () => {
-    // This would be the ideal approach, but since we're fixing existing code,
-    // we'll rely on the useGLTF.preload below
-};
+// Start downloading everything as soon as this module loads.
+useGLTF.preload(MODEL_URL);
+['idle', 'salute', 'clapping', 'victory', 'sitting', 'laying'].forEach((name) => useFBX.preload(animationUrl(name)));
 
-// Preload the model
-useGLTF.preload('/models/human/developer.glb');
+/**
+ * Returns a renamed copy of the FBX's first clip. The Mixamo root tracks
+ * ("Armature.*" / "Armature001.*") are dropped: the GLB has no node with that
+ * name, so three.js could not bind them and logged a warning for each one.
+ */
+const toClip = (fbx, name) => {
+    const clip = fbx.animations[0].clone();
+    clip.name = name;
+    clip.tracks = clip.tracks.filter((track) => !track.name.startsWith('Armature'));
+    return clip;
+};
 
 const Developer = ({ animationName = 'idle', ...props }) => {
-    const group = useRef();
+    const groupRef = useRef(null);
+    const { nodes, materials } = useGLTF(MODEL_URL);
 
-    // Load the model
-    const { nodes, materials } = useGLTF('/models/human/developer.glb');
+    // Hooks must run unconditionally and in the same order on every render.
+    // useFBX caches by URL, so these are cheap after the first load.
+    const idle = useFBX(animationUrl('idle'));
+    const salute = useFBX(animationUrl('salute'));
+    const clapping = useFBX(animationUrl('clapping'));
+    const victory = useFBX(animationUrl('victory'));
+    const sitting = useFBX(animationUrl('sitting'));
+    const laying = useFBX(animationUrl('laying'));
 
-    // Load animations one by one with individual refs to prevent re-renders
-    const idleAnimationRef = useRef();
-    const saluteAnimationRef = useRef();
-    const clappingAnimationRef = useRef();
-    const victoryAnimationRef = useRef();
-    const sittingAnimationRef = useRef();
-    const layingAnimationRef = useRef();
+    const animations = useMemo(
+        () => [
+            toClip(idle, 'idle'),
+            toClip(salute, 'salute'),
+            toClip(clapping, 'clapping'),
+            toClip(victory, 'victory'),
+            toClip(sitting, 'sitting'),
+            toClip(laying, 'laying'),
+        ],
+        [idle, salute, clapping, victory, sitting, laying],
+    );
 
-    // Load animations and store in refs
-    if (!idleAnimationRef.current) {
-        idleAnimationRef.current = useFBX('/models/animations/idle.fbx').animations[0];
-        idleAnimationRef.current.name = 'idle';
-    }
-
-    if (!saluteAnimationRef.current) {
-        saluteAnimationRef.current = useFBX('/models/animations/salute.fbx').animations[0];
-        saluteAnimationRef.current.name = 'salute';
-    }
-
-    if (!clappingAnimationRef.current) {
-        clappingAnimationRef.current = useFBX('/models/animations/clapping.fbx').animations[0];
-        clappingAnimationRef.current.name = 'clapping';
-    }
-
-    if (!victoryAnimationRef.current) {
-        victoryAnimationRef.current = useFBX('/models/animations/victory.fbx').animations[0];
-        victoryAnimationRef.current.name = 'victory';
-    }
-
-    if (!sittingAnimationRef.current) {
-        sittingAnimationRef.current = useFBX('/models/animations/sitting.fbx').animations[0];
-        sittingAnimationRef.current.name = 'sitting';
-    }
-
-    if (!layingAnimationRef.current) {
-        layingAnimationRef.current = useFBX('/models/animations/laying.fbx').animations[0];
-        layingAnimationRef.current.name = 'laying';
-    }
-
-    // Combine all animations for the useAnimations hook
-    const animations = [
-        idleAnimationRef.current,
-        saluteAnimationRef.current,
-        clappingAnimationRef.current,
-        victoryAnimationRef.current,
-        sittingAnimationRef.current,
-        layingAnimationRef.current
-    ].filter(Boolean); // Filter out any undefined animations
-
-    // Set up animations only when all are loaded
-    const { actions } = useAnimations(animations, group);
+    const { actions } = useAnimations(animations, groupRef);
 
     useEffect(() => {
-        // Only play animation if it exists in actions
-        if (actions && actions[animationName]) {
-            actions[animationName].reset().fadeIn(0.5).play();
-
-            return () => {
-                if (actions[animationName]) {
-                    actions[animationName].fadeOut(0.5);
-                }
-            };
-        } else if (animations.length > 0) {
-            console.warn(`Animation "${animationName}" not found in actions:`, actions);
+        const action = actions[animationName];
+        if (!action) {
+            console.warn(`Animation "${animationName}" not found`);
+            return;
         }
-    }, [animationName, actions, animations.length]);
+
+        action.reset().fadeIn(0.5).play();
+        return () => {
+            action.fadeOut(0.5);
+        };
+    }, [animationName, actions]);
 
     return (
-        <group {...props} dispose={null} ref={group}>
+        <group {...props} dispose={null} ref={groupRef}>
             <primitive object={nodes.Hips} />
             <skinnedMesh
                 name="EyeLeft"
