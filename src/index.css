@@ -17,7 +17,6 @@
   --color-white-800: #e4e4e6;
   --color-white: #ffffff;
 
-  --background-image-terminal: url('/assets/terminal.png');
 }
 
 /*
@@ -108,13 +107,9 @@
   @apply cursor-pointer flex justify-center items-center gap-2;
 }
 
-@utility arrow-btn {
-  /* projects section  */
-  @apply w-10 h-10 p-3 cursor-pointer active:scale-95 transition-all rounded-full arrow-gradient;
-}
-
-@utility arrow-gradient {
-  @apply bg-linear-to-r from-blue-500 to-purple-500;
+@utility project-nav-btn {
+  /* projects section */
+  @apply w-11 h-11 rounded-full border border-black-500 bg-black-300 text-white-600 flex items-center justify-center transition-all hover:text-white hover:border-white-500 active:scale-95;
 }
 
 @utility tech-logo {
@@ -187,11 +182,6 @@
 @utility social-icon {
   /*  footer */
   @apply w-12 h-12 rounded-full flex justify-center items-center bg-black-300 border border-black-200;
-}
-
-@utility particle-text-contrast {
-  /* Add new utility for particle text contrast */
-  text-shadow: 0 0 8px rgba(2, 132, 255, 0.3);
 }
 
 @utility waving-hand {
@@ -284,17 +274,36 @@
     border-radius: 4px;
 }
 
-/* Add media query for mobile optimization */
-@media (max-width: 768px) {
-    canvas {
-        filter: contrast(110%) brightness(120%);
-    }
+/* About card line drawings (src/components/AboutVisuals.jsx) */
+.cube-spin {
+    animation: cube-spin 16s linear infinite;
+}
 
-    .hero-overlay {
-        background: radial-gradient(
-                circle at center,
-                transparent 0%,
-                rgba(0,0,0,0.8) 100%
-        );
-    }
+.dash-flow {
+    animation: dash-flow 1.2s linear infinite;
+}
+
+.code-type {
+    transform-origin: left;
+    animation: code-type 4.5s ease-in-out infinite;
+}
+
+@keyframes cube-spin {
+    from { transform: rotateX(-22deg) rotateY(0deg); }
+    to { transform: rotateX(-22deg) rotateY(360deg); }
+}
+
+@keyframes dash-flow {
+    to { stroke-dashoffset: -16; }
+}
+
+@keyframes code-type {
+    0%, 8% { transform: scaleX(0); }
+    35%, 85% { transform: scaleX(1); }
+    100% { transform: scaleX(1); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cube-spin { animation: none; transform: rotateX(-22deg) rotateY(-35deg); }
+    .dash-flow, .code-type, .waving-hand { animation: none; }
 }

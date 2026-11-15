@@ -1,5 +1,6 @@
 import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import Button from "../components/Button.jsx";
+import { BranchGraph, CubeToCode, MailGlyph } from "../components/AboutVisuals.jsx";
 
 // react-globe.gl pulls in three.js's WebGPU/TSL builds (~1 MB), so load it on
 // demand instead of blocking the first paint of the page.
@@ -161,115 +162,101 @@ const About = () => {
     };
 
     return (
-        <section className="c-space my-20" id="about">
-            <div className="grid xl:grid-cols-3 xl:grid-rows-6 md:grid-cols-2 grid-cols-1 gap-5 h-full">
+        <section className="c-space my-20">
+            {/* Rows size to their content; each card's visual (photo, globe or
+                drawing) stretches to fill any spare height instead of leaving gaps. */}
+            <div className="grid xl:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5">
 
-                {/* Section 1: Introduction */}
-                <div className="xl:col-span-1 xl:row-span-3">
-                    <div className="grid-container">
-                        <img
-                            src="/assets/portrait.webp"
-                            alt="Mark Kats"
-                            width={900}
-                            height={1200}
-                            className="w-full sm:h-[276px] h-80 object-cover object-[50%_35%] rounded-lg"
-                        />
-                        <div>
-                            <p className="grid-headtext">Hi, I&#39;m Mark</p>
-                            <p className="grid-subtext">
-                                Software Solution Engineer at Microsoft. I help engineering teams ship faster and more
-                                securely with AI, and I build the AI tools I talk about.
-                            </p>
-                        </div>
+                {/* Introduction */}
+                <div className="grid-container">
+                    <img
+                        src="/assets/portrait.webp"
+                        alt="Mark Kats"
+                        width={900}
+                        height={1200}
+                        className="w-full flex-1 min-h-72 object-cover object-[50%_30%] rounded-lg"
+                    />
+                    <div>
+                        <p className="grid-headtext">Hi, I&#39;m Mark</p>
+                        <p className="grid-subtext">
+                            Software Solution Engineer at Microsoft. I help engineering teams ship faster and more
+                            securely with AI, and I build the AI tools I talk about.
+                        </p>
                     </div>
                 </div>
 
-                {/* Section 2: Tech Stack */}
-                <div className="col-span-1 xl:row-span-3">
-                    <div className="grid-container">
-                        <div className="w-full h-full p-0">
-                            <img
-                                src="/assets/grid2.jpg"
-                                alt=""
-                                className="w-full sm:h-[200px] h-fit object-cover mx-auto rounded-lg"
+                {/* Focus areas */}
+                <div className="grid-container">
+                    <BranchGraph className="flex-1 min-h-36" />
+                    <div>
+                        <p className="grid-headtext">What I focus on</p>
+                        <ul className="grid-subtext space-y-1.5">
+                            {FOCUS_AREAS.map((area) => (
+                                <li key={area} className="flex gap-2">
+                                    <span className="text-[#e0b052]" aria-hidden="true">▹</span>
+                                    {area}
+                                </li>
+                            ))}
+                        </ul>
+                        <p className="grid-subtext text-sm mt-4">
+                            <span className="text-white-700">Hands-on with:</span> {HANDS_ON.join(" · ")}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Location */}
+                <div className="grid-container">
+                    <div className="flex-1 min-h-[326px] flex justify-center items-center">
+                        <Suspense fallback={<div style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }} />}>
+                            <Globe
+                                ref={globeRef}
+                                onGlobeReady={handleGlobeReady}
+                                height={GLOBE_SIZE}
+                                width={GLOBE_SIZE}
+                                backgroundColor="rgba(0,0,0,0)"
+                                backgroundImageOpacity={0.5}
+                                showAtmosphere
+                                showGraticules
+                                globeImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-day.jpg"
+                                bumpImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-topology.png"
+                                labelsData={LOCATIONS}
+                                labelLat="lat"
+                                labelLng="lng"
+                                labelText="text"
+                                labelSize="size"
+                                labelColor="color"
+                                labelAltitude="altitude"
+                                labelResolution={2}
+                                labelIncludeDot={true}
+                                labelDotRadius={0.4}
+                                labelLabel={(d) => `${d.text}`}
+
+                                // Arc configuration
+                                arcsData={ARCS_DATA}
+                                arcColor={(d) => d.color || 'rgba(255, 255, 255, 0.4)'}
+                                arcStroke={0.5}
+                                arcDashLength={0.01}
+                                arcDashGap={0.01}
+                                arcDashAnimateTime={1000}
+                                arcAltitude={0.35}
+                                arcCircularResolution={64}
                             />
-                        </div>
-                        <div>
-                            <p className="grid-headtext">What I focus on</p>
-                            <ul className="grid-subtext space-y-1.5">
-                                {FOCUS_AREAS.map((area) => (
-                                    <li key={area} className="flex gap-2">
-                                        <span className="text-[#e0b052]">▹</span>
-                                        {area}
-                                    </li>
-                                ))}
-                            </ul>
-                            <p className="grid-subtext text-sm mt-4">
-                                <span className="text-white-700">Hands-on with:</span> {HANDS_ON.join(" · ")}
-                            </p>
-                        </div>
+                        </Suspense>
+                    </div>
+                    <div>
+                        <p className="grid-headtext">Based in Melbourne</p>
+                        <p className="grid-subtext">
+                            Working with enterprise engineering teams across Australia and New Zealand. My path has run
+                            through Europe and Asia, and I speak English, Spanish, Russian and Chinese.
+                        </p>
+                        <Button name="Get in touch" containerClass="w-full mt-6" onClick={scrollToContact}/>
                     </div>
                 </div>
 
-                {/* Section 3: Globe with Location & Contact Button */}
-                <div className="col-span-1 xl:row-span-4">
+                {/* Background */}
+                <div className="xl:col-span-2">
                     <div className="grid-container">
-                        <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
-                            <Suspense fallback={<div style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }} />}>
-                                <Globe
-                                    ref={globeRef}
-                                    onGlobeReady={handleGlobeReady}
-                                    height={GLOBE_SIZE}
-                                    width={GLOBE_SIZE}
-                                    backgroundColor="rgba(0,0,0,0)"
-                                    backgroundImageOpacity={0.5}
-                                    showAtmosphere
-                                    showGraticules
-                                    globeImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-day.jpg"
-                                    bumpImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-topology.png"
-                                    labelsData={LOCATIONS}
-                                    labelLat="lat"
-                                    labelLng="lng"
-                                    labelText="text"
-                                    labelSize="size"
-                                    labelColor="color"
-                                    labelAltitude="altitude"
-                                    labelResolution={2}
-                                    labelIncludeDot={true}
-                                    labelDotRadius={0.4}
-                                    labelLabel={(d) => `${d.text}`}
-
-                                    // Arc configuration
-                                    arcsData={ARCS_DATA}
-                                    arcColor={(d) => d.color || 'rgba(255, 255, 255, 0.4)'}
-                                    arcStroke={0.5}
-                                    arcDashLength={0.01}
-                                    arcDashGap={0.01}
-                                    arcDashAnimateTime={1000}
-                                    arcAltitude={0.35}
-                                    arcCircularResolution={64}
-                                />
-                            </Suspense>
-                        </div>
-                        <div>
-                            <p className="grid-headtext">Based in Melbourne</p>
-                            <p className="grid-subtext">
-                                Working with enterprise engineering teams across Australia and New Zealand. My path has run through Europe
-                                and Asia, and I speak English, Spanish, Russian and Chinese.
-                            </p>
-                            <Button name="Get in touch" containerClass="w-full mt-10" onClick={scrollToContact}/>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Section 4: Driven by Innovation and Design */}
-                <div className="xl:col-span-2 xl:row-span-3">
-                    <div className="grid-container">
-                        <img
-                            src="/assets/grid3.jpg"
-                            alt=""
-                            className="w-full sm:h-[266px] h-full object-cover"
-                        />
+                        <CubeToCode className="flex-1 min-h-44" />
                         <div>
                             <p className="grid-headtext">From 3D to developer tools</p>
                             <p className="grid-subtext">
@@ -285,33 +272,32 @@ const About = () => {
                     </div>
                 </div>
 
-                {/* Section 5: Email Card with Enhanced Feedback */}
-                <div className="xl:col-span-1 xl:row-span-2">
+                {/* Email */}
+                <div className="md:col-span-2 xl:col-span-1">
                     <div className="grid-container">
-                        <img
-                            src="/assets/grid4.jpg"
-                            alt=""
-                            className="w-full md:h-[126px] sm:h-[276px] h-fit object-cover sm:object-top"
-                        />
+                        <MailGlyph className="flex-1 min-h-32" />
                         <div className="space-y-2">
                             <p className="grid-subtext text-center">Contact me</p>
                             <div
-                                className="copy-container flex items-center justify-center gap-3 cursor-pointer hover:bg-dark-600 px-4 py-3 rounded-lg transition-colors"
+                                className="copy-container gap-3 hover:bg-black-300 px-3 py-3 rounded-lg transition-colors"
                                 onClick={handleCopy}
                                 onKeyDown={handleCopyKeyDown}
                                 role="button"
                                 tabIndex={0}
-                                aria-label="Copy email address"
+                                aria-label={`Copy email address ${EMAIL}`}
                             >
                                 <img
                                     src={hasCopied ? '/assets/tick.svg' : '/assets/copy.svg'}
-                                    alt={hasCopied ? 'Copied' : 'Copy'}
-                                    className="w-5 h-5 transition-transform hover:scale-110"
+                                    alt=""
+                                    className="w-5 h-5 shrink-0"
                                 />
-                                <p className="lg:text-2xl md:text-xl font-medium text-gray_gradient break-all">
+                                <p className="text-base sm:text-lg font-medium text-gray_gradient whitespace-nowrap">
                                     {EMAIL}
                                 </p>
                             </div>
+                            <p className="text-center text-xs text-white-500 h-4" aria-live="polite">
+                                {hasCopied ? 'Copied to clipboard' : 'Click to copy'}
+                            </p>
                         </div>
                     </div>
                 </div>

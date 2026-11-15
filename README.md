@@ -1,6 +1,6 @@
 # 🌌 Three.js Portfolio
 
-> A cutting-edge portfolio website showcasing the intersection of mathematics, 3D graphics, and modern web development.
+> Interactive 3D portfolio of Mark Kats, Software Solution Engineer at Microsoft: real-time WebGL, built with React and Three.js.
 
 [![Live Demo](https://img.shields.io/badge/🚀-Live%20Demo-blue?style=for-the-badge)](https://markkats.com)
 [![React](https://img.shields.io/badge/React-19.3-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
@@ -11,7 +11,7 @@
 ## ✨ Features
 
 ### 🎯 **Interactive 3D Visualizations**
-- **Lorenz Attractor**: Real-time mathematical chaos simulation with 10,000 particles
+- **Black hole**: Real-time ray-traced black hole with gravitational lensing and an accretion disk (GLSL)
 - **3D Globe**: Interactive world map with animated flight paths
 - **Project Showcase**: 3D laptop models with video textures
 
@@ -30,8 +30,8 @@
 ## 🎥 Preview
 
 <div align="center">
-  <img src="public/assets/lorenz.png" alt="Hero Section" width="800"/>
-  <p><em>Lorenz Attractor visualization with Gargantua-inspired color mapping</em></p>
+  <img src="docs/hero.jpeg" alt="Hero section" width="800"/>
+  <p><em>Ray-traced black hole: the far side of the disk is lensed over and under the shadow</em></p>
 </div>
 
 ## 🚀 Quick Start
@@ -89,7 +89,8 @@
 ```
 src/
 ├── 📁 components/           # Reusable UI components
-│   ├── 🌌 LorenzAttractor   # Mathematical particle system
+│   ├── 🕳️ BlackHole         # Ray-traced black hole shader (hero)
+│   ├── ✏️ AboutVisuals      # Animated line drawings for the About cards
 │   ├── 💻 Laptop            # 3D model with video textures
 │   ├── 👤 Developer         # Animated character model
 │   └── 🏅 AwardMedal        # 3D hackathon medal (extruded from the badge outline)
@@ -137,11 +138,11 @@ assets-src/                  # Source assets that are not served (Mixamo FBX)
 
 ## 🎯 Featured Sections
 
-### **Hero - Lorenz Attractor**
-- Mathematical chaos visualization 
-- 10,000-particle real-time simulation
-- Gargantua-inspired color mapping
-- Auto-rotating camera system
+### **Hero - Black Hole**
+- Per-pixel ray tracing of light paths around a Schwarzschild black hole
+- Lensed accretion disk with Keplerian rotation and relativistic beaming
+- Camera leans gently towards the mouse; no drag, so touch scrolling is never captured
+- Renders at reduced resolution, pauses off-screen and stays still with reduced motion
 
 ### **About - Interactive Globe**  
 - Real geographical coordinates

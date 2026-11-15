@@ -1,24 +1,40 @@
-import { OrbitControls } from "@react-three/drei";
-import { Suspense, useState } from "react";
-import CanvasLoader, { LoadingSignal } from "../components/CanvasLoader.jsx";
+import { useEffect, useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import { useMediaQuery } from "react-responsive";
-import { calculateSizes } from "../constants/index.js";
-import Button from "../components/Button.jsx";
-import LorenzAttractor from "../components/LorenzAttractor.jsx";
+import BlackHole from "../components/BlackHole.jsx";
 
 const Hero = () => {
-    const isSmall = useMediaQuery({ maxWidth: 440 });
     const isMobile = useMediaQuery({ maxWidth: 768 });
-    const isTablet = useMediaQuery({ minWidth: 769, maxWidth: 1024 });
-    const [isLoading, setIsLoading] = useState(false);
+    const prefersReducedMotion = useMediaQuery({ query: "(prefers-reduced-motion: reduce)" });
+    const sectionRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(true);
 
-    const sizes = calculateSizes(isSmall, isMobile, isTablet);
+    // Stop rendering the (GPU-heavy) background once it scrolls out of view.
+    useEffect(() => {
+        const observer = new IntersectionObserver(([entry]) => setIsVisible(entry.isIntersecting));
+        observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
+    const animate = isVisible && !prefersReducedMotion;
 
     return (
-        <section className="min-h-screen w-full flex flex-col relative">
-            <div className="hero-overlay" />
-            <div className="w-full mx-auto flex flex-col sm:mt-36 mt-20 c-space gap-3 relative z-10 pointer-events-none">
+        <section ref={sectionRef} className="min-h-screen w-full flex flex-col relative">
+            {/* Purely decorative: full viewport width, and it never captures
+                clicks, drags or touches, so the page scrolls normally. */}
+            <div className="absolute inset-y-0 left-1/2 w-screen -translate-x-1/2 pointer-events-none" aria-hidden="true">
+                <Canvas
+                    // The ray tracer runs per pixel; a reduced internal resolution
+                    // keeps it smooth, and the soft image hides the upscaling.
+                    dpr={isMobile ? 0.6 : 0.75}
+                    frameloop={animate ? "always" : "demand"}
+                    gl={{ antialias: false, powerPreference: "high-performance" }}
+                >
+                    <BlackHole animate={animate} />
+                </Canvas>
+            </div>
+
+            <div className="w-full mx-auto flex flex-col sm:mt-36 mt-24 c-space gap-3 relative z-10 pointer-events-none">
                 <p className="sm:text-3xl text-2xl font-medium text-white text-center font-generalsans">
                     Hi, I&#39;m Mark <span className="waving-hand">👋</span>
                 </p>
@@ -28,53 +44,9 @@ const Hero = () => {
                 </p>
             </div>
 
-            {/* Full viewport width (not just the 1280px content column) so the
-                attractor isn't cut off at the column edge on wide screens. */}
-            <div className="h-full absolute inset-y-0 left-1/2 w-screen -translate-x-1/2">
-                {isLoading && <CanvasLoader />}
-                <Canvas
-                    className="w-full h-full"
-                    style={{
-                        // position: 'fixed',
-                        pointerEvents: isMobile ? 'none' : 'auto'
-                    }}
-                    camera={{
-                        position: [0, 0, 35],
-                        fov: 70,
-                        near: 0.1,
-                        far: 1000
-                    }}
-                >
-                    <Suspense fallback={<LoadingSignal onChange={setIsLoading} />}>
-                        <LorenzAttractor
-                            position={sizes.lorenzPosition}
-                            scale={sizes.lorenzScale}
-                            pointSize={sizes.pointSize}
-                        />
-
-                        <OrbitControls
-                            enableZoom={false}
-                            enablePan={false}
-                            autoRotate
-                            autoRotateSpeed={isMobile ? 0.5 : 0.3}
-                            minPolarAngle={Math.PI / 3}
-                            maxPolarAngle={Math.PI / 2.2}
-                            minAzimuthAngle={-Math.PI / 4}
-                            maxAzimuthAngle={Math.PI / 4}
-                            rotateSpeed={isMobile ? 0.8 : 1.0}
-                            // Target the attractor’s focal point (near z = 24)
-                            target={[0, 0, 24]}
-                        />
-
-                        <ambientLight intensity={0.8} />
-                        <directionalLight position={[10, 10, 10]} intensity={0.5} />
-                    </Suspense>
-                </Canvas>
-            </div>
-
             <div className="absolute bottom-7 left-0 right-0 w-full z-10 c-space">
-                <a href="#about" className="w-fit">
-                    <Button name="Explore my work" containerClass="sm:w-fit w-full sm:min-w-96" />
+                <a href="#about" className="btn sm:w-fit w-full sm:min-w-96 bg-black-300/80 backdrop-blur-sm border border-white/10 hover:border-white/25">
+                    Explore my work
                 </a>
             </div>
         </section>

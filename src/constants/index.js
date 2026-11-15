@@ -351,15 +351,6 @@ export const myProjects = [
     },
 ];
 
-export const calculateSizes = (isSmall, isMobile, isTablet) => {
-    return {
-        lorenzPosition: [0, 0, 0], // Keep at origin
-        lorenzScale: 1,           // Maintain original scale
-        // For desktop devices, use a larger pointSize (1.5) to make particles visible
-        pointSize: isSmall ? 0.15 : isMobile ? 0.1 : isTablet ? 0.08 : 0.2
-    };
-};
-
 
 export const workExperiences = [
     {
