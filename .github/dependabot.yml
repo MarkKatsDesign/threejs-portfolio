@@ -1,0 +1,24 @@
+version: 2
+updates:
+  # npm packages: one grouped PR per week for minor/patch updates.
+  # Major versions still get their own PRs, since they can need code changes.
+  # (Security fixes are raised separately and immediately by Dependabot.)
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Australia/Melbourne
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+
+  # Versions of the GitHub Actions used in .github/workflows
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
