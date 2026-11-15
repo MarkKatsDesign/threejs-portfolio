@@ -2,13 +2,14 @@ import {myProjects} from "../constants/index.js";
 import {Suspense, useState} from "react";
 import {Canvas} from "@react-three/fiber";
 import {Center, OrbitControls} from "@react-three/drei";
-import CanvasLoader from "../components/CanvasLoader.jsx";
+import CanvasLoader, {LoadingSignal} from "../components/CanvasLoader.jsx";
 import Laptop from "../components/Laptop.jsx"
 
 const projectCount = myProjects.length;
 
 const Projects = () => {
     const [selectedProjectIndex, setSelectedProjectIndex] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
     const currentProject = myProjects[selectedProjectIndex];
 
@@ -79,12 +80,13 @@ const Projects = () => {
                         </button>
                     </div>
                 </div>
-                <div className="border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
+                <div className="relative border border-black-300 bg-black-200 rounded-lg h-96 md:h-full">
+                    {isLoading && <CanvasLoader />}
                     <Canvas>
                         <ambientLight intensity={Math.PI} />
                         <directionalLight position={[10, 10, 5]} />
                         <Center>
-                            <Suspense fallback={<CanvasLoader />}>
+                            <Suspense fallback={<LoadingSignal onChange={setIsLoading} />}>
                                 <group scale={1.5} position={[0, -15, -35]} rotation={[0, 0, 0]}>
                                     {<Laptop texture={currentProject.texture}/>}
                                 </group>

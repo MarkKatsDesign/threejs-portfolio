@@ -40,7 +40,7 @@ const Navbar = () => {
     };
 
     return (
-        <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-xs">
             <div className="max-w-7xl mx-auto">
                 <div className="flex justify-between items-center p-5 mx-auto c-space">
                     <a
@@ -56,7 +56,7 @@ const Navbar = () => {
                     </a>
                     <button
                         onClick={toggleMenu}
-                        className="text-neutral-400 hover:text-white focus:outline-none sm:hidden flex"
+                        className="text-neutral-400 hover:text-white focus:outline-hidden sm:hidden flex"
                         aria-label="Toggle menu"
                     >
                         <img src={isMenuOpen ? "/assets/close.svg" : "/assets/menu.svg"} alt="toggle" className="w-6 h-6"/>

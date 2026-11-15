@@ -1,6 +1,6 @@
 import { OrbitControls } from "@react-three/drei";
-import { Suspense } from "react";
-import CanvasLoader from "../components/CanvasLoader.jsx";
+import { Suspense, useState } from "react";
+import CanvasLoader, { LoadingSignal } from "../components/CanvasLoader.jsx";
 import { Canvas } from "@react-three/fiber";
 import { useMediaQuery } from "react-responsive";
 import { calculateSizes } from "../constants/index.js";
@@ -13,6 +13,7 @@ const Hero = () => {
     const isMobile = useMediaQuery({ maxWidth: 768 });
     const isTablet = useMediaQuery({ minWidth: 769, maxWidth: 1024 });
     // const [debugInfo, setDebugInfo] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
 
     const sizes = calculateSizes(isSmall, isMobile, isTablet);
 
@@ -27,6 +28,7 @@ const Hero = () => {
             </div>
 
             <div className="w-full h-full absolute inset-0">
+                {isLoading && <CanvasLoader />}
                 <Canvas
                     className="w-full h-full"
                     style={{
@@ -40,7 +42,7 @@ const Hero = () => {
                         far: 1000
                     }}
                 >
-                    <Suspense fallback={<CanvasLoader />}>
+                    <Suspense fallback={<LoadingSignal onChange={setIsLoading} />}>
                         <LorenzAttractor
                             // onDebugUpdate={setDebugInfo}
                             position={sizes.lorenzPosition}

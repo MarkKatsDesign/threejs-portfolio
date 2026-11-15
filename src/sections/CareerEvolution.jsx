@@ -2,24 +2,26 @@ import {workExperiences} from "../constants/index.js";
 import {Canvas} from "@react-three/fiber";
 import {OrbitControls} from "@react-three/drei";
 import {Suspense, useState} from "react";
-import CanvasLoader from "../components/CanvasLoader.jsx";
+import CanvasLoader, {LoadingSignal} from "../components/CanvasLoader.jsx";
 import Developer from "../components/Developer.jsx";
 
 const CareerEvolution = () => {
     const [animationName, setAnimationName] = useState('idle')
+    const [isLoading, setIsLoading] = useState(false)
 
     return (
         <section className="c-space my-20">
            <div className="w-full text-white-600">
                <h3 className='head-text'>My Career Evolution</h3>
                 <div className="work-container">
-                    <div className="work-canvas">
+                    <div className="work-canvas relative">
+                        {isLoading && <CanvasLoader />}
                         <Canvas>
                             <ambientLight intensity={2} />
                             <spotLight position={[10,10,10]} angle={0.15} penumbra={1} />
                             <directionalLight position={[10,10,10]} intensity={3} />
                             <OrbitControls enableZoom={false} maxPolarAngle={Math.PI/2}/>
-                            <Suspense fallback={<CanvasLoader />}>
+                            <Suspense fallback={<LoadingSignal onChange={setIsLoading} />}>
                                 <Developer position-y={-3} scale={3} animationName={animationName}/>
                             </Suspense>
                         </Canvas>
