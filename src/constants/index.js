@@ -37,9 +37,9 @@ export const recognition = {
     featured: {
         event: 'Microsoft Global Hackathon 2026',
         title: '1st Place · Executive Challenge',
-        project: 'Frontier SE',
+        project: 'Frontier',
         description:
-            "An AI-powered desktop app that takes the admin load off Microsoft's solution engineers and sellers, so they can spend more time with customers. It triages email and Teams, keeps pipeline and reporting up to date, and turns a one-line customer brief into a solution spec, an Azure architecture diagram, a cost estimate and a customer-ready deck. A small team of us in Australia and New Zealand built it in our own time on the GitHub Copilot SDK and MCP, and it is now used by Microsoft sellers around the world.",
+            "An internal, AI-powered desktop app that takes the admin load off Microsoft's customer-facing teams, so they can spend more time with customers. It triages email, Teams and customer context, and turns a one-line customer brief into a solution spec, an Azure architecture diagram, a cost estimate and a customer-ready deck. A small team of us in Australia and New Zealand built it in our own time on the GitHub Copilot SDK and MCP, and it is now used by Microsoft teams around the world.",
         contribution:
             "I built the Architecture Workbench, personalisation features and the app's homepage, and I am a code owner on the project.",
     },
@@ -372,8 +372,8 @@ export const workExperiences = [
             'Technical deep dives, demos and proofs of concept for GitHub Copilot, GitHub Advanced Security and GitHub Enterprise',
             'Enablement sessions and workshops that help engineering teams adopt AI-assisted development',
             'DevOps modernisation across GitHub and Azure DevOps',
-            'Co-built Frontier SE, an AI desktop app for Microsoft solution engineers and sellers, on the GitHub Copilot SDK and MCP. I built its Architecture Workbench, personalisation features and homepage, and I am a code owner on the project',
-            '1st Place, Executive Challenge, Microsoft Global Hackathon 2026 (Frontier SE)',
+            'Co-built Frontier, an internal AI desktop app for Microsoft\'s customer-facing teams, on the GitHub Copilot SDK and MCP. I built its Architecture Workbench, personalisation features and homepage, and I am a code owner on the project',
+            '1st Place, Executive Challenge, Microsoft Global Hackathon 2026 (Frontier)',
         ],
         icon: '/assets/microsoft.svg',
         animation: 'victory',
