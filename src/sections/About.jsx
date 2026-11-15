@@ -1,125 +1,147 @@
-import {useState, useRef, useEffect} from 'react';
-import Globe from 'react-globe.gl';
+import { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import Button from "../components/Button.jsx";
+
+// react-globe.gl pulls in three.js's WebGPU/TSL builds (~1 MB), so load it on
+// demand instead of blocking the first paint of the page.
+const Globe = lazy(() => import('react-globe.gl'));
+
+const EMAIL = 'mark.kats.career@gmail.com';
+const GLOBE_SIZE = 326;
+
+// Locations shown on the globe
+const LOCATIONS = [
+    {
+        lat: -37.8136,
+        lng: 144.9631,
+        text: "Melbourne",
+        color: '#00FF00',
+        size: 2,
+        altitude: 0.1
+    },
+    {
+        lat: 52.2297,
+        lng: 21.0122,
+        text: "Warsaw",
+        color: '#FF0000',
+        size: 2,
+        altitude: 0.08
+    },
+    {
+        lat: 36.7213,
+        lng: -4.4217,
+        text: "Malaga",
+        color: '#FFFF00',
+        size: 2,
+        altitude: 0.08
+    },
+    {
+        lat: 31.2998,
+        lng: 120.5853,
+        text: "Suzhou",
+        color: '#0000FF',
+        size: 2,
+        altitude: 0.08
+    },
+    {
+        lat: 55.7558,
+        lng: 37.6173,
+        text: "Moscow",
+        color: '#FF00FF',
+        size: 2,
+        altitude: 0.08
+    },
+    {
+        lat: -6.2088,
+        lng: 106.8456,
+        text: "Jakarta",
+        color: '#00FFFF',
+        size: 2,
+        altitude: 0.08
+    }
+];
+
+// Arcs connecting the cities
+const ARCS_DATA = [
+    // Moscow to Malaga
+    {
+        startLat: 55.7558,
+        startLng: 37.6173,
+        endLat: 36.7213,
+        endLng: -4.4217,
+        color: '#FF69B4' // Hot pink
+    },
+    // Malaga to Suzhou
+    {
+        startLat: 36.7213,
+        startLng: -4.4217,
+        endLat: 31.2998,
+        endLng: 120.5853,
+        color: '#FFA500' // Orange
+    },
+    // Suzhou to Warsaw
+    {
+        startLat: 31.2998,
+        startLng: 120.5853,
+        endLat: 52.2297,
+        endLng: 21.0122,
+        color: '#32CD32' // Lime green
+    },
+    // Warsaw to Melbourne
+    {
+        startLat: 52.2297,
+        startLng: 21.0122,
+        endLat: -37.8136,
+        endLng: 144.9631,
+        color: '#00BFFF' // Deep sky blue
+    },
+    // Melbourne to Jakarta
+    {
+        startLat: -37.8136,
+        startLng: 144.9631,
+        endLat: -6.2088,
+        endLng: 106.8456,
+        color: '#9370DB' // Medium purple
+    }
+];
 
 const About = () => {
     const [hasCopied, setHasCopied] = useState(false);
-    const globeRef = useRef(); // Ref to access Globe instance
+    const globeRef = useRef(null); // Ref to access Globe instance
+    const copyTimeoutRef = useRef(null);
+
+    useEffect(() => () => clearTimeout(copyTimeoutRef.current), []);
 
     const handleCopy = () => {
-        navigator.clipboard.writeText('mark.kats.career@gmail.com');
-        setHasCopied(true);
-        setTimeout(() => setHasCopied(false), 2000);
+        navigator.clipboard
+            .writeText(EMAIL)
+            .then(() => {
+                setHasCopied(true);
+                clearTimeout(copyTimeoutRef.current);
+                copyTimeoutRef.current = setTimeout(() => setHasCopied(false), 2000);
+            })
+            .catch((error) => console.error('Could not copy email address:', error));
     };
 
-    // Enhanced locations data with multiple cities
-    const locations = [
-        {
-            lat: -37.8136,
-            lng: 144.9631,
-            text: "Melbourne",
-            color: '#00FF00',
-            size: 2,
-            altitude: 0.1
-        },
-        {
-            lat: 52.2297,
-            lng: 21.0122,
-            text: "Warsaw",
-            color: '#FF0000',
-            size: 2,
-            altitude: 0.08
-        },
-        {
-            lat: 36.7213,
-            lng: -4.4217,
-            text: "Malaga",
-            color: '#FFFF00',
-            size: 2,
-            altitude: 0.08
-        },
-        {
-            lat: 31.2998,
-            lng: 120.5853,
-            text: "Suzhou",
-            color: '#0000FF',
-            size: 2,
-            altitude: 0.08
-        },
-        {
-            lat: 55.7558,
-            lng: 37.6173,
-            text: "Moscow",
-            color: '#FF00FF',
-            size: 2,
-            altitude: 0.08
-        },
-        {
-            lat: -6.2088,
-            lng: 106.8456,
-            text: "Jakarta",
-            color: '#00FFFF',
-            size: 2,
-            altitude: 0.08
+    const handleCopyKeyDown = (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleCopy();
         }
-    ];
+    };
 
-    // Create arcs data - connecting Melbourne to all other cities
-    const arcsData = [
-        // Moscow to Malaga
-        {
-            startLat: 55.7558,
-            startLng: 37.6173,
-            endLat: 36.7213,
-            endLng: -4.4217,
-            color: '#FF69B4' // Hot pink
-        },
-        // Malaga to Suzhou
-        {
-            startLat: 36.7213,
-            startLng: -4.4217,
-            endLat: 31.2998,
-            endLng: 120.5853,
-            color: '#FFA500' // Orange
-        },
-        // Suzhou to Warsaw
-        {
-            startLat: 31.2998,
-            startLng: 120.5853,
-            endLat: 52.2297,
-            endLng: 21.0122,
-            color: '#32CD32' // Lime green
-        },
-        // Warsaw to Melbourne
-        {
-            startLat: 52.2297,
-            startLng: 21.0122,
-            endLat: -37.8136,
-            endLng: 144.9631,
-            color: '#00BFFF' // Deep sky blue
-        },
-        // Melbourne to Jakarta
-        {
-            startLat: -37.8136,
-            startLng: 144.9631,
-            endLat: -6.2088,
-            endLng: 106.8456,
-            color: '#9370DB' // Medium purple
-        }
-    ];
+    // Runs once the (lazily loaded) globe has initialised.
+    const handleGlobeReady = () => {
+        const globe = globeRef.current;
+        if (!globe) return;
 
-    // Initialize globe with rotation animation
-    useEffect(() => {
-        if (globeRef.current) {
-            // Set initial position focused on Melbourne
-            globeRef.current.pointOfView({ lat: -37.8136, lng: 144.9631, altitude: 2.5 }, 1000);
+        // Set initial position focused on Melbourne
+        globe.pointOfView({ lat: -37.8136, lng: 144.9631, altitude: 2.5 }, 1000);
 
-            // Auto-rotation
-            const controls = globeRef.current.controls();
-            controls.autoRotate = true;
-            controls.autoRotateSpeed = 0.5;
-        }
-    }, []);
+        // Auto-rotation
+        const controls = globe.controls();
+        controls.autoRotate = true;
+        controls.autoRotateSpeed = 0.5;
+    };
 
     const scrollToContact = () => {
         const contactSection = document.getElementById('contact');
@@ -170,39 +192,41 @@ const About = () => {
                 <div className="col-span-1 xl:row-span-4">
                     <div className="grid-container">
                         <div className="rounded-3xl w-full sm:h-[326px] h-fit flex justify-center items-center">
-                            <Globe
-                                ref={globeRef}
-                                height={326}
-                                width={326}
-                                backgroundColor="rgba(0,0,0,0)"
-                                backgroundImageOpacity={0.5}
-                                showAtmosphere
-                                showGraticules
-                                globeImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-day.jpg"
-                                bumpImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-topology.png"
-                                labelsData={locations}
-                                labelLat="lat"
-                                labelLng="lng"
-                                labelText="text"
-                                labelSize="size"
-                                labelColor="color"
-                                labelAltitude="altitude"
-                                labelResolution={2}
-                                labelIncludeDot={true}
-                                labelDotRadius={0.4}
-                                labelLabel={(d) => `${d.text}`}
-                                onLabelClick={(label) => console.log(`Clicked on ${label.text}`)}
+                            <Suspense fallback={<div style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }} />}>
+                                <Globe
+                                    ref={globeRef}
+                                    onGlobeReady={handleGlobeReady}
+                                    height={GLOBE_SIZE}
+                                    width={GLOBE_SIZE}
+                                    backgroundColor="rgba(0,0,0,0)"
+                                    backgroundImageOpacity={0.5}
+                                    showAtmosphere
+                                    showGraticules
+                                    globeImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-day.jpg"
+                                    bumpImageUrl="https://cdn.jsdelivr.net/npm/three-globe@2.32.0/example/img/earth-topology.png"
+                                    labelsData={LOCATIONS}
+                                    labelLat="lat"
+                                    labelLng="lng"
+                                    labelText="text"
+                                    labelSize="size"
+                                    labelColor="color"
+                                    labelAltitude="altitude"
+                                    labelResolution={2}
+                                    labelIncludeDot={true}
+                                    labelDotRadius={0.4}
+                                    labelLabel={(d) => `${d.text}`}
 
-                                // Add these arc configurations
-                                arcsData={arcsData}
-                                arcColor={(d) => d.color || 'rgba(255, 255, 255, 0.4)'}
-                                arcStroke={0.5}
-                                arcDashLength={0.01}
-                                arcDashGap={0.01}
-                                arcDashAnimateTime={1000}
-                                arcAltitude={0.35}
-                                arcCircularResolution={64}
-                            />
+                                    // Arc configuration
+                                    arcsData={ARCS_DATA}
+                                    arcColor={(d) => d.color || 'rgba(255, 255, 255, 0.4)'}
+                                    arcStroke={0.5}
+                                    arcDashLength={0.01}
+                                    arcDashGap={0.01}
+                                    arcDashAnimateTime={1000}
+                                    arcAltitude={0.35}
+                                    arcCircularResolution={64}
+                                />
+                            </Suspense>
                         </div>
                         <div>
                             <p className="grid-headtext">Location</p>
@@ -246,7 +270,9 @@ const About = () => {
                             <div
                                 className="copy-container flex items-center justify-center gap-3 cursor-pointer hover:bg-dark-600 px-4 py-3 rounded-lg transition-colors"
                                 onClick={handleCopy}
+                                onKeyDown={handleCopyKeyDown}
                                 role="button"
+                                tabIndex={0}
                                 aria-label="Copy email address"
                             >
                                 <img
@@ -255,7 +281,7 @@ const About = () => {
                                     className="w-5 h-5 transition-transform hover:scale-110"
                                 />
                                 <p className="lg:text-2xl md:text-xl font-medium text-gray_gradient break-all">
-                                    mark.kats.career@gmail.com
+                                    {EMAIL}
                                 </p>
                             </div>
                         </div>
@@ -268,6 +294,3 @@ const About = () => {
 };
 
 export default About;
-
-
-
