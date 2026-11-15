@@ -14,7 +14,7 @@ const Recognition = () => {
 
             <div className="grid lg:grid-cols-5 grid-cols-1 gap-5 mt-12">
                 <div
-                    className="lg:col-span-2 relative h-[380px] sm:h-[440px] rounded-lg bg-black-200 border border-black-300 overflow-hidden"
+                    className="lg:col-span-2 relative h-95 sm:h-110 rounded-lg bg-black-200 border border-black-300 overflow-hidden"
                     role="img"
                     aria-label="3D model of the Microsoft Hackathon 2026 1st Place Challenge Winner badge"
                 >

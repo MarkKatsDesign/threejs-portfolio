@@ -103,7 +103,7 @@ const Projects = () => {
                         </button>
                     </div>
                 </div>
-                <div className="relative border border-black-300 bg-black-200 rounded-lg h-96 sm:h-[480px] lg:h-[560px] lg:sticky lg:top-24 lg:self-start">
+                <div className="relative border border-black-300 bg-black-200 rounded-lg h-96 sm:h-120 lg:h-140 lg:sticky lg:top-24 lg:self-start">
                     {isLoading && <CanvasLoader />}
                     <Canvas camera={{ position: [0, 5, 44], fov: 40 }}>
                         <ambientLight intensity={Math.PI} />

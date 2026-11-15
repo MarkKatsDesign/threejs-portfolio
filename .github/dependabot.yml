@@ -13,6 +13,13 @@ updates:
     groups:
       minor-and-patch:
         update-types: [minor, patch]
+    ignore:
+      # TypeScript is only here for the ESLint React plugin, whose typescript-eslint
+      # dependency supports TypeScript < 6.1. TypeScript 7 (the Go rewrite) makes
+      # `eslint .` crash. Remove this once typescript-eslint supports 7; check with
+      # `npm view typescript-eslint peerDependencies`.
+      - dependency-name: typescript
+        update-types: ["version-update:semver-major"]
 
   # Versions of the GitHub Actions used in .github/workflows
   - package-ecosystem: github-actions
