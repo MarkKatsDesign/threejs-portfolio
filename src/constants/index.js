@@ -35,10 +35,13 @@ export const professionalRecommendations = [
 
 export const recognition = {
     featured: {
-        event: 'Microsoft Hackathon 2026',
-        title: '1st Place · Challenge Winner',
+        event: 'Microsoft Global Hackathon 2026',
+        title: '1st Place · Executive Challenge',
+        project: 'Frontier SE',
         description:
-            'Took first place in my challenge at the Microsoft Hackathon, the company-wide event where Microsoft employees build and pitch new ideas.',
+            "An AI-powered desktop app that takes the admin load off Microsoft's solution engineers and sellers, so they can spend more time with customers. It triages email and Teams, keeps pipeline and reporting up to date, and turns a one-line customer brief into a solution spec, an Azure architecture diagram, a cost estimate and a customer-ready deck. A small team of us in Australia and New Zealand built it in our own time on the GitHub Copilot SDK and MCP, and it is now used by Microsoft sellers around the world.",
+        contribution:
+            "I built the Architecture Workbench, personalisation features and the app's homepage, and I am a code owner on the project.",
     },
     more: [
         {
@@ -364,13 +367,13 @@ export const workExperiences = [
         name: 'Microsoft',
         pos: 'Software Solution Engineer',
         duration: 'Feb 2026 - Present',
-        title: "I help enterprise customers in energy, manufacturing, aviation and food & agribusiness adopt GitHub Copilot, GitHub Advanced Security, GitHub Enterprise and Azure DevOps across the software development lifecycle.",
+        title: "Pre-sales technical specialist for GitHub across enterprise customers in Australia and New Zealand. I lead the energy, manufacturing and telecommunications sectors and support other sectors across the team. I work with engineering leaders and executives to understand how their teams build and ship software, then show where GitHub can make that faster and more secure.",
         highlights: [
-            "Guide hands-on security evaluations on customers' own code, side by side with the tools they already use",
-            'Shape enterprise Copilot rollouts and workshops, from identity and Conditional Access to policy, model and cost governance',
-            'Scope DevSecOps architecture for disconnected, air-gapped operational technology environments',
-            'Core builder of an internal agentic AI app for technical sellers, built on the GitHub Copilot SDK and MCP. I built its Architecture Workbench, which turns a one-line customer brief into a solution spec, an Azure architecture diagram with Well-Architected checks, a live cost estimate and a customer-ready deck',
-            '1st Place Challenge Winner, Microsoft Hackathon 2026',
+            'Technical deep dives, demos and proofs of concept for GitHub Copilot, GitHub Advanced Security and GitHub Enterprise',
+            'Enablement sessions and workshops that help engineering teams adopt AI-assisted development',
+            'DevOps modernisation across GitHub and Azure DevOps',
+            'Co-built Frontier SE, an AI desktop app for Microsoft solution engineers and sellers, on the GitHub Copilot SDK and MCP. I built its Architecture Workbench, personalisation features and homepage, and I am a code owner on the project',
+            '1st Place, Executive Challenge, Microsoft Global Hackathon 2026 (Frontier SE)',
         ],
         icon: '/assets/microsoft.svg',
         animation: 'victory',

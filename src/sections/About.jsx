@@ -10,7 +10,7 @@ const EMAIL = 'mark.kats.career@gmail.com';
 const FOCUS_AREAS = [
     'AI-assisted development with GitHub Copilot',
     'Code security: CodeQL, secret scanning, Dependabot',
-    'DevSecOps on GitHub Enterprise & Azure DevOps',
+    'DevSecOps and modernisation on GitHub and Azure DevOps',
     'Agentic AI & MCP',
     'Azure architecture',
 ];
@@ -254,7 +254,7 @@ const About = () => {
                         <div>
                             <p className="grid-headtext">Based in Melbourne</p>
                             <p className="grid-subtext">
-                                Working with enterprise engineering teams across Australia. My path has run through Europe
+                                Working with enterprise engineering teams across Australia and New Zealand. My path has run through Europe
                                 and Asia, and I speak English, Spanish, Russian and Chinese.
                             </p>
                             <Button name="Get in touch" containerClass="w-full mt-10" onClick={scrollToContact}/>

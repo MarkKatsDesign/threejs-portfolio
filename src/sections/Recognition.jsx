@@ -16,7 +16,7 @@ const Recognition = () => {
                 <div
                     className="lg:col-span-2 relative h-[380px] sm:h-[440px] rounded-lg bg-black-200 border border-black-300 overflow-hidden"
                     role="img"
-                    aria-label="3D model of the Microsoft Hackathon 2026 1st Place Challenge Winner medal"
+                    aria-label="3D model of the Microsoft Hackathon 2026 1st Place Challenge Winner badge"
                 >
                     {isLoading && <CanvasLoader />}
                     <Canvas camera={{ position: [0, 0, 6], fov: 40 }} dpr={[1, 2]}>
@@ -45,7 +45,13 @@ const Recognition = () => {
                     <div>
                         <p className="text-sm uppercase tracking-[0.2em] text-[#e0b052] font-medium">{recognition.featured.event}</p>
                         <p className="text-white text-2xl sm:text-3xl font-semibold mt-2">{recognition.featured.title}</p>
-                        <p className="grid-subtext mt-4">{recognition.featured.description}</p>
+                        <p className="text-white-700 mt-4">
+                            <span className="font-semibold text-white">{recognition.featured.project}:</span>{' '}
+                            {recognition.featured.description}
+                        </p>
+                        <p className="grid-subtext mt-3">
+                            <span className="text-white-700">My part:</span> {recognition.featured.contribution}
+                        </p>
                     </div>
 
                     <div className="border-t border-black-300 pt-5 mt-2">
