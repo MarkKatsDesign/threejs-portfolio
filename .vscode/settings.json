@@ -11,5 +11,6 @@
   },
   "editor.quickSuggestions": {
     "strings": true
-  }
+  },
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe"
 }

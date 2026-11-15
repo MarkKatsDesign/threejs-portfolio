@@ -100,7 +100,7 @@
 }
 
 @utility grid-subtext {
-  @apply text-[#afb0b6] text-base font-generalsans;
+  @apply text-white-600 text-base font-generalsans;
 }
 
 @utility copy-container {

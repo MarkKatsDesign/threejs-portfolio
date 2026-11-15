@@ -206,7 +206,7 @@ const About = () => {
 
                 {/* Location */}
                 <div className="grid-container">
-                    <div className="flex-1 min-h-[326px] flex justify-center items-center">
+                    <div className="flex-1 min-h-81.5 flex justify-center items-center">
                         <Suspense fallback={<div style={{ width: GLOBE_SIZE, height: GLOBE_SIZE }} />}>
                             <Globe
                                 ref={globeRef}

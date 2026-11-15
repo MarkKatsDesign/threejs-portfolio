@@ -36,3 +36,7 @@ TECHNICAL_DOCUMENTATION.md
 
 # Claude Code configuration (personal development settings)
 .claude/
+
+# Python virtual environment for scripts/
+.venv/
+__pycache__/

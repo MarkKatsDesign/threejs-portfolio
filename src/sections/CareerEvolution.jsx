@@ -16,7 +16,7 @@ const CareerEvolution = () => {
                 <div className="work-container">
                     {/* Fixed height and sticky so the avatar stays in view (and in
                         proportion) while hovering entries further down the list. */}
-                    <div className="work-canvas relative h-96 lg:h-[640px] lg:sticky lg:top-24 lg:self-start">
+                    <div className="work-canvas relative h-96 lg:h-160 lg:sticky lg:top-24 lg:self-start">
                         {isLoading && <CanvasLoader />}
                         <Canvas>
                             <ambientLight intensity={2} />

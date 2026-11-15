@@ -1,7 +1,8 @@
 # Usage: python scripts/prep-award-images.py <award.jpg> <portrait.jpg> <outDir>
-# Needs Pillow + numpy. Cuts the award badge out of its white background,
-# measures its scalloped outline (for src/components/awardOutline.js) and
-# resizes the portrait used in the About section.
+# Setup (once): python -m venv .venv
+#               .venv/Scripts/pip install -r scripts/requirements.txt   (macOS/Linux: .venv/bin/pip)
+# Cuts the award badge out of its white background, measures its scalloped
+# outline (for src/components/awardOutline.js) and resizes the About portrait.
 import json, math, sys
 from collections import deque
 import numpy as np
@@ -40,9 +41,10 @@ alpha = alpha.filter(ImageFilter.MinFilter(5)).filter(ImageFilter.GaussianBlur(1
 ys, xs = np.where(~bg)
 cx, cy = (xs.min() + xs.max()) / 2, (ys.min() + ys.max()) / 2
 half = max(xs.max() - xs.min(), ys.max() - ys.min()) / 2 + 2
-box = tuple(int(round(v)) for v in (cx - half, cy - half, cx + half, cy + half))
+left, top, right, bottom = (int(round(v)) for v in (cx - half, cy - half, cx + half, cy + half))
+box = (left, top, right, bottom)
 rgba = img.convert('RGBA'); rgba.putalpha(alpha)
-badge = rgba.crop(box).resize((1024, 1024), Image.LANCZOS)
+badge = rgba.crop(box).resize((1024, 1024), Image.Resampling.LANCZOS)
 badge.save(f'{out_dir}/hackathon-award.png', optimize=True)
 badge.save(f'{out_dir}/hackathon-award.webp', quality=90, method=6)
 
@@ -67,7 +69,7 @@ print('crop box', box, 'radius min/max', min(prof), max(prof))
 
 # --- Portrait: resize for the About card ---
 p = Image.open(portrait_src).convert('RGB')
-p.thumbnail((900, 1200), Image.LANCZOS)
+p.thumbnail((900, 1200), Image.Resampling.LANCZOS)
 p.save(f'{out_dir}/portrait.jpg', quality=84, optimize=True, progressive=True)
 p.save(f'{out_dir}/portrait.webp', quality=82, method=6)
 print('portrait', p.size)

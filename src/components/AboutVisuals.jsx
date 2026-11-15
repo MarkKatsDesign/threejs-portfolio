@@ -101,7 +101,7 @@ export const CubeToCode = ({ className }) => (
                     {CUBE_FACES.map((rotation) => (
                         <div
                             key={rotation}
-                            className="absolute inset-0 border border-[#e0b052]/70 bg-[#e0b052]/[0.04]"
+                            className="absolute inset-0 border border-[#e0b052]/70 bg-[#e0b052]/4"
                             style={{
                                 transform: `${rotation} translateZ(40px)`,
                                 backgroundImage:

@@ -53,7 +53,7 @@ const Contact = () => {
         <section className="c-space my-20">
             <div className="mx-auto max-w-3xl overflow-hidden rounded-xl border border-white/10 bg-black-200 shadow-2xl shadow-black/80">
                 {/* macOS-style title bar */}
-                <div className="relative flex h-11 items-center border-b border-black-300 bg-linear-to-b from-[#26262c] to-[#1c1c21] px-4">
+                <div className="relative flex h-11 items-center border-b border-black-300 bg-linear-to-b from-[#26262c] to-black-300 px-4">
                     <div className="flex gap-2" aria-hidden="true">
                         <span className="h-3 w-3 rounded-full bg-[#ff5f57]" />
                         <span className="h-3 w-3 rounded-full bg-[#febc2e]" />
