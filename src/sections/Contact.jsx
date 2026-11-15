@@ -57,7 +57,10 @@ const Contact = () => {
                     from_name: form.name.trim(),
                     to_name: 'Mark',
                     from_email: form.email.trim(),
-                    to_email: 'mark.kats.career@gmail.com',
+                    // The template's Reply To field is {{reply_to}}, so replying in
+                    // Gmail goes straight to the visitor. The recipient is fixed in
+                    // the EmailJS template, not sent from the browser.
+                    reply_to: form.email.trim(),
                     message: form.message.trim(),
                 },
                 import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
