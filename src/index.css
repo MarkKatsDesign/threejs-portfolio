@@ -1,5 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/general-sans') layer(base);
-
+/* The General Sans font is loaded from index.html (<link>) so it starts downloading earlier. */
 @import 'tailwindcss';
 
 @theme {

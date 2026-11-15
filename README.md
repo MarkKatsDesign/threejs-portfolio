@@ -3,9 +3,9 @@
 > A cutting-edge portfolio website showcasing the intersection of mathematics, 3D graphics, and modern web development.
 
 [![Live Demo](https://img.shields.io/badge/🚀-Live%20Demo-blue?style=for-the-badge)](https://markkats.com)
-[![React](https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
-[![Three.js](https://img.shields.io/badge/Three.js-0.173.0-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
-[![Vite](https://img.shields.io/badge/Vite-6.1.0-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
+[![React](https://img.shields.io/badge/React-19.3-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Three.js](https://img.shields.io/badge/Three.js-0.187-black?style=for-the-badge&logo=three.js)](https://threejs.org/)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
 
 ## ✨ Features
@@ -37,7 +37,7 @@
 ## 🚀 Quick Start
 
 ### Prerequisites
-- **Node.js** 18+ 
+- **Node.js** 20.19+ (required by Vite 8)
 - **npm** or **yarn**
 
 ### Installation
@@ -105,18 +105,18 @@ src/
 ## 🎨 Key Technologies
 
 ### **Frontend**
-- **React 19.0.0** - Latest React with concurrent features
-- **Vite 6.1.0** - Next-generation frontend tooling
-- **Tailwind CSS** - Utility-first CSS framework
+- **React 19.3** - Latest React with concurrent features
+- **Vite 8** - Next-generation frontend tooling (Rolldown bundler)
+- **Tailwind CSS 4** - Utility-first CSS framework
 
 ### **3D Graphics**  
-- **Three.js 0.173.0** - Core 3D graphics library
+- **Three.js 0.187** - Core 3D graphics library
 - **@react-three/fiber** - React renderer for Three.js
 - **@react-three/drei** - Useful helpers and abstractions
 - **react-globe.gl** - Interactive 3D globe
 
 ### **Animation**
-- **GSAP 3.12.7** - Professional animation library
+- **GSAP 3.15** - Professional animation library
 - **Framer Motion** (planned) - React animation library
 
 ### **Communication**
